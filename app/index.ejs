@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en" ng-strict-di>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="shortcut icon" href="favicon.ico" />
+
+<!--
+    <script>
+      window.godownBase = 'https://rawgit.com/DoctorBud/godown/master/godown/';
+    </script>
+    <script src="https://rawgit.com/DoctorBud/godown/master/godown/godown.js"></script>
+ -->
+
+<!--
+    <link
+      rel=stylesheet
+      href="https://smartdown.site/lib/fonts.css">
+    <link
+      rel=stylesheet
+      href="https://smartdown.site/lib/smartdown.css">
+    <script
+      src="https://smartdown.site/lib/smartdown.js">
+    </script>
+ -->
+
+    <base href="<%= htmlWebpackPlugin.options.baseUrl %>" />
+    <title>SmartdownViewer Demo</title>
+  </head>
+
+  <body>
+    <div
+      class="container-fluid"
+      ng-controller="MainController as c">
+      <div class="row control-panel">
+        <div class="col-3">
+          <div class="btn-group-xs btn-group-block" uib-dropdown keyboard-nav>
+            <button
+              id="simple-btn-keyboard-nav"
+              type="button"
+              class="btn btn-xs btn-info btn-block"
+              uib-dropdown-toggle>
+                Examples <span class="caret"></span>
+            </button>
+            <ul
+              class="dropdown-menu btn-group-menu-block"
+              uib-dropdown-menu
+              role="menu"
+              aria-labelledby="simple-btn-keyboard-nav">
+
+              <a
+                role="menuitem"
+                ng-click="c.loadSourceItem(e.file, e.title, e.url)"
+                href=""
+                class="dropdown-item"
+                ng-repeat="e in c.examples">
+                  {{e.title}}
+              </a>
+            </ul>
+          </div>
+        </div>
+        <div class="col-3">
+          <div
+            class="btn btn-xs btn-info btn-block btn-xs"
+            ngf-select="c.loadFile($files[0])"
+            ngf-multiple="false">
+            Select File
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="input-group input-group-sm">
+            <input
+              ng-model="c.inputURL"
+              type="text"
+              class="form-control input-group-xs"
+              placeholder="Enter a URL to a smartdown file"
+              aria-describedby="import-url">
+
+            <span class="input-group-btn">
+              <button
+                type="button"
+                ng-disabled="c.inputURL.length === 0"
+                class="btn btn-info btn-xs btn-block input-group-button-xs"
+                ng-click="c.loadURL(c.inputURL)">
+                Load
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="col-10">
+          <div
+            ngf-drop
+            ngf-select
+            ng-model="c.file"
+            class="drop-box"
+            ngf-drag-over-class="'dragover'"
+            ngf-multiple="false"
+            ngf-allow-dir="false"
+            accept="*"
+            ngf-pattern="'*'">
+            <i>Drop file here</i>
+          </div>
+          <div ngf-no-file-drop>
+            File Drag/Drop is not supported for this browser
+          </div>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            ng-click="c.showHelp()"
+            target="_blank"
+            class="btn btn-xs btn-success xbtn-help">
+            Help
+          </button>
+        </div>
+
+        <div
+          class="col-12"
+          ng-hide="!c.inputSource">
+            <button
+              type="button"
+              class="btn btn-xs btn-secondary btn-block"
+              ng-click="c.toggleInputSource()">
+              Show Source</b>
+            </button>
+        </div>
+
+      </div>
+
+      <div class="row" ng-if="c.errorMessage">
+        <div class="col-12">
+          <pre>{{c.errorMessage}}</pre>
+        </div>
+      </div>
+
+
+      <div
+        class="row smartdown-frame"
+        style="overflow:hidden;"
+        ng-hide="!c.inputSource">
+
+        <div
+          id="split-left"
+          class="split"
+          style="margin:0;padding:0;"
+          ng-hide="!c.showInputSource">
+          <textarea
+            ng-model="c.editSource"
+            ui-codemirror="c.uicmOptions">
+          </textarea>
+        </div>
+
+        <div
+          id="split-right"
+          class="split smartdown-outer-container smartdown-theme-chat"
+          ng-class="c.showInputSource ? 'source-visible' : 'source-hidden'"
+          style="margin:0;padding:0;">
+          <div
+            id="InputRender"
+            class="smartdown-container InputRender"
+            ng-dblclick="c.zoomed = !c.zoomed"
+            ng-class="{zoom:c.zoomed}">
+          </div>
+        </div>
+      </div>
+  </body>
+
+<script type="text/ng-template" id="Help.tpl.html">
+
+<div class="modal-header">
+  <h3 class="modal-title">
+    Help for Smartdown and Smartdown Viewer
+  </h3>
+</div>
+
+<div class="modal-body help-modal">
+<p>
+Eventually, there will be more informative and useful help text here.
+<code>Smartdown 0.0.88
+</code> is still in beta, although getting closer to stable.
+</p>
+
+<p>
+For now, the most important things:
+
+<ul>
+<li>
+This <b>Smartdown Viewer</b> web application is designed to act as a demonstration of Smartdown Examples, and also to act as a convenient way to experiment with Smartdown and then to be able to publish and share this content via a URL.
+</li>
+
+<li>
+The <code>Show Source</code> button enables the viewing of the Smartdown source text. This text may be edited to enable experimentation with Smartdown. However, in the current implementation of <b>Smartdown Viewer</b>, this edited text is not saved anywhere, so the author is responsible for copying the text from the source pane and preserving it in a file.
+</li>
+
+<li>
+<b>Smartdown Viewer</b> supports several ways to view Smartdown content, in addition to pasting Smartdown content into the <code>Show Source</code> window:
+<ol>
+<li>
+Drag and Drop Smartdown files into the <code>Drop file here</code> box.
+</li>
+
+<li>
+Click the <code>Drop file here</code> box to select a file.
+</li>
+
+<li>
+Click the <code>Select File</code> button to select a file.
+</li>
+
+<li>
+Type or paste a URL into the <code>Enter a URL to a smartdown file</code> and then click the <code>Load</code>.
+</li>
+
+
+<li>
+Compose a URL that references an externally-hosted Smartdown document. For example, the relative URL to the <code>README.md</code> for Smartdown is <code>lib/gallery/README.md</code>, so a URL like <code>http://smartdown.site/?url=lib/gallery/README.md</code>
+</li>
+
+
+</ol>
+</li>
+
+
+</ul>
+
+</p>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-info" type="button" ng-click="help.ok()">OK</button>
+</div>
+
+
+</script>
+
+
+</html>
