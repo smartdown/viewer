@@ -42,7 +42,7 @@ var entryFile = './app.js';
 var outputPath = dist;
 var outputFile = './bundle.js';
 var indexFile = 'index.ejs';
-var baseURL = 'viewer/';
+var baseURL = '/viewer/';
 
 var config = {
   mode: nodeEnvironment,
