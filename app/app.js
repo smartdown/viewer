@@ -2,8 +2,8 @@ import angular from 'angular';
 // import './bootswatch-simplex.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap-reboot.min.css';
 // import './bootswatch-spacelab.min.css';
-// import 'bootstrap/dist/css/bootstrap-theme.min.css';
 import nguibootstrap from 'ui-bootstrap4';
 
 import ngResource from 'angular-resource';

@@ -181,3 +181,8 @@ div.container-fluid .row.smartdown-frame {
   border: none !important;
 }
 
+
+/* BS4 Overrides */
+.MathJax_Display svg {
+  vertical-align: unset;
+}

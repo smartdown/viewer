@@ -1,6 +1,6 @@
 {
   "name": "smartdown-viewer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "server": "node_modules/.bin/http-server --cors -c-1 docs/",
     "test": "export BUILD=test && karma start"
   },
-  "author": "Daniel Keith <dan@quantumclay.com> (http://doctorbud.com)",
+  "author": "Daniel Keith <dan@quantumclay.com> (https://doctorbud.com)",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.7.4",
@@ -21,7 +21,6 @@
     "bootstrap": "^4.1.3",
     "codemirror": "^5.40.0",
     "ng-file-upload": "^12.2.13",
-    "smartdown": "0.0.87",
     "smartdown-gallery": "0.0.13",
     "split.js": "^1.3.5",
     "webpack-bundle-analyzer": "^2.13.1"

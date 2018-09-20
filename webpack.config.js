@@ -42,7 +42,16 @@ var entryFile = './app.js';
 var outputPath = dist;
 var outputFile = './bundle.js';
 var indexFile = 'index.ejs';
-var baseURL = '/viewer/';
+var baseURL = development ? '/' : '/viewer/';
+
+var galleryIgnores = [
+  '.git/**',
+  'README.md',
+  'LICENSE',
+  'package.json',
+  'index.html',
+  'AAADebug.md',
+  'ExtensionsPlayableP5X.js'];
 
 var config = {
   mode: nodeEnvironment,
@@ -77,10 +86,11 @@ var config = {
 
     new CopyWebpackPlugin(
       [
-        // { from: smartdown },
+        { from: '../CNAME' },
 
         { from: path.join(smartdown, '8.smartdown.css') },
         { from: path.join(smartdown, '8.smartdown.css.map') },
+
         { from: path.join(smartdown, 'smartdown_d3cloudJS.js') },
         { from: path.join(smartdown, 'smartdown_d3cloudJS.js.map') },
         { from: path.join(smartdown, 'smartdown_d3dcCSS.js') },
@@ -109,20 +119,19 @@ var config = {
         { from: path.join(smartdown, 'smartdown_vendors~stdlib.js.map') },
         { from: path.join(smartdown, 'smartdown_vendors~three.js') },
         { from: path.join(smartdown, 'smartdown_vendors~three.js.map') },
-        { from: path.join(smartdown, 'smartdown_vendors~three.js.map') },
-        // { from: path.join(smartdown, 'webcomponents-loader.js') },
-        // { from: path.join(smartdown, 'webcomponents-loader.js'), to: 'lib/' },
 
         { from: path.join(smartdown, 'xypic.js'), to: 'lib/' },
         { from: path.join(smartdown, 'viz.js'), to: 'lib/' },
         { from: path.join(smartdown, 'lite.render.js'), to: 'lib/' },
         { from: path.join(smartdown, 'webcomponents-loader.js'), to: 'lib/' },
 
-        // { from: path.join(smartdown, 'marker-icon-2x.png') },
-        // { from: path.join(smartdown, 'marker-icon.png') },
-        // { from: path.join(smartdown, 'marker-shadow.png') },
+        { from: path.join(smartdown, 'marker-icon-2x.png') },
+        { from: path.join(smartdown, 'marker-icon.png') },
+        { from: path.join(smartdown, 'marker-shadow.png') },
 
-        { from: smartdownGallery, to: 'gallery/', ignore: '.git/**' },
+        { from: smartdownGallery, to: 'gallery/', ignore: galleryIgnores },
+        { from: path.join(smartdown, '../gallery/README.md'), to: 'gallery/' },
+        { from: path.join(smartdown, '../gallery/favicon.ico'), to: 'gallery/' },
       ]
     ),
 
