@@ -42,7 +42,7 @@ var entryFile = './app.js';
 var outputPath = dist;
 var outputFile = './bundle.js';
 var indexFile = 'index.ejs';
-var baseURL = development ? '/' : '/viewer/';
+var baseURL = ''; // development ? '/' : '/viewer/';
 
 var galleryIgnores = [
   '.git/**',
