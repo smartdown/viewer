@@ -118,4 +118,5 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 ## Version History
 
 - 0.0.1 - First isolation from Smartdown's site/ directory.
+- 0.0.2 - Update to latest draft version of Smartdown 0.0.88
 

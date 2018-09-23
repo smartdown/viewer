@@ -284,7 +284,8 @@ angular.module('ui.codemirror', [])
 
 app.run(['$rootScope',
   function($rootScope) {
-    var baseURL = '/viewer/'; // 'https://smartdown.site/';
+    /* global BASE_URL */
+    var baseURL = BASE_URL; // 'https://smartdown.site/';
 
     /* eslint no-trailing-spaces: 0 */
     /* global smartdown */
