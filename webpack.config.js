@@ -122,12 +122,14 @@ var config = {
         // { from: path.join(smartdown, 'smartdown_vendors~three.js') },
         // { from: path.join(smartdown, 'smartdown_vendors~three.js.map') },
 
-        { from: path.join(smartdown, 'brython.js'), to: 'lib/' },
-        { from: path.join(smartdown, 'brython_stdlib.js'), to: 'lib/' },
-        { from: path.join(smartdown, 'xypic.js'), to: 'lib/' },
-        { from: path.join(smartdown, 'viz.js'), to: 'lib/' },
-        { from: path.join(smartdown, 'lite.render.js'), to: 'lib/' },
-        { from: path.join(smartdown, 'webcomponents-loader.js'), to: 'lib/' },
+        { from: smartdown, to: 'lib/' },
+
+        // { from: path.join(smartdown, 'brython.js'), to: 'lib/' },
+        // { from: path.join(smartdown, 'brython_stdlib.js'), to: 'lib/' },
+        // { from: path.join(smartdown, 'xypic.js'), to: 'lib/' },
+        // { from: path.join(smartdown, 'viz.js'), to: 'lib/' },
+        // { from: path.join(smartdown, 'lite.render.js'), to: 'lib/' },
+        // { from: path.join(smartdown, 'webcomponents-loader.js'), to: 'lib/' },
 
         // { from: path.join(smartdown, 'marker-icon-2x.png') },
         // { from: path.join(smartdown, 'marker-icon.png') },
