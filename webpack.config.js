@@ -21,8 +21,8 @@ var bs = path.join(nm, '/bootstrap/dist/js/bootstrap.min.js');
 var fa = path.join(nm, '/font-awesome');
 var codemirror = path.join(nm, '/codemirror/');
 var codemirrorJS = path.join(codemirror, '/lib/codemirror.js');
-// var smartdown = path.join(nm, 'smartdown/docs/lib/');
-var smartdown = '/Users/bud/DoctorBud/smartdown/docs/lib/';
+var smartdown = path.join(nm, 'smartdown/docs/lib/');
+// var smartdown = '/Users/bud/DoctorBud/smartdown/docs/lib/';
 var smartdownGallery = path.join(nm, 'smartdown-gallery/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
 var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
@@ -136,8 +136,8 @@ var config = {
         // { from: path.join(smartdown, 'marker-shadow.png') },
 
         { from: smartdownGallery, to: 'gallery/', ignore: galleryIgnores },
-        { from: path.join(smartdown, '../gallery/README.md'), to: 'gallery/' },
-        { from: path.join(smartdown, '../gallery/favicon.ico'), to: 'gallery/' },
+        { from: path.join(smartdown, '../../README.md'), to: 'gallery/' },
+        // { from: path.join(smartdown, '../gallery/favicon.ico'), to: 'gallery/' },
       ]
     ),
 

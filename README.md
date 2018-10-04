@@ -120,5 +120,5 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - 0.0.1 - First isolation from Smartdown's site/ directory.
 - 0.0.2 - Update to latest draft version of Smartdown 0.0.88
 - 0.0.3 - Apply this site as smartdown.site via CNAME.
-- 0.0.4 - Upgrade to the official version of SD 0.0.88. Populate the /lib directory for legacy clients who expected smartdown.site/lib/ to be where SD lives.
+- 0.0.4 - Upgrade to SD 0.0.89. Populate the /lib directory for legacy clients who expected smartdown.site/lib/ to be where SD lives.
 
