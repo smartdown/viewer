@@ -21,8 +21,9 @@ var bs = path.join(nm, '/bootstrap/dist/js/bootstrap.min.js');
 var fa = path.join(nm, '/font-awesome');
 var codemirror = path.join(nm, '/codemirror/');
 var codemirrorJS = path.join(codemirror, '/lib/codemirror.js');
-var smartdown = path.join(nm, 'smartdown/docs/lib/');
-// var smartdown = '/Users/bud/DoctorBud/smartdown/docs/lib/';
+var smartdownRoot = path.join(nm, 'smartdown/docs/');
+// var smartdownRoot = '/Users/bud/DoctorBud/smartdown/docs/';
+var smartdown = path.join(smartdownRoot, 'lib/');
 var smartdownGallery = path.join(nm, 'smartdown-gallery/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
 var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
@@ -42,7 +43,7 @@ var entryFile = './app.js';
 var outputPath = dist;
 var outputFile = './bundle.js';
 var indexFile = 'index.ejs';
-var baseURL = ''; // development ? '/' : '/viewer/';
+var baseURL = '/'; // development ? '/' : '/viewer/';
 
 var galleryIgnores = [
   '.git/**',
@@ -90,50 +91,10 @@ var config = {
 
         { from: smartdown },
 
-        // { from: path.join(smartdown, '8.smartdown.css') },
-        // { from: path.join(smartdown, '8.smartdown.css.map') },
-
-        // { from: path.join(smartdown, 'smartdown_d3cloudJS.js') },
-        // { from: path.join(smartdown, 'smartdown_d3cloudJS.js.map') },
-        // { from: path.join(smartdown, 'smartdown_d3dcCSS.js') },
-        // { from: path.join(smartdown, 'smartdown_d3dcCSS.js.map') },
-        // { from: path.join(smartdown, 'smartdown_ldf.js') },
-        // { from: path.join(smartdown, 'smartdown_ldf.js.map') },
-        // { from: path.join(smartdown, 'smartdown_p5DOM.js') },
-        // { from: path.join(smartdown, 'smartdown_p5DOM.js.map') },
-        // { from: path.join(smartdown, 'smartdown_stdlib.js') },
-        // { from: path.join(smartdown, 'smartdown_stdlib.js.map') },
-        // { from: path.join(smartdown, 'smartdown_topojson.js') },
-        // { from: path.join(smartdown, 'smartdown_topojson.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~d3dc.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~d3dc.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~d3fc.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~d3fc.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~d3~d3dc.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~d3~d3dc.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~p5DOM~p5Sound~p5js.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~p5DOM~p5Sound~p5js.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~p5Sound.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~p5Sound.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~stdlib-sotu.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~stdlib-sotu.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~stdlib.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~stdlib.js.map') },
-        // { from: path.join(smartdown, 'smartdown_vendors~three.js') },
-        // { from: path.join(smartdown, 'smartdown_vendors~three.js.map') },
-
         { from: smartdown, to: 'lib/' },
+        { from: smartdown, to: 'gist/' },
 
-        // { from: path.join(smartdown, 'brython.js'), to: 'lib/' },
-        // { from: path.join(smartdown, 'brython_stdlib.js'), to: 'lib/' },
-        // { from: path.join(smartdown, 'xypic.js'), to: 'lib/' },
-        // { from: path.join(smartdown, 'viz.js'), to: 'lib/' },
-        // { from: path.join(smartdown, 'lite.render.js'), to: 'lib/' },
-        // { from: path.join(smartdown, 'webcomponents-loader.js'), to: 'lib/' },
-
-        // { from: path.join(smartdown, 'marker-icon-2x.png') },
-        // { from: path.join(smartdown, 'marker-icon.png') },
-        // { from: path.join(smartdown, 'marker-shadow.png') },
+        // { from: path.join(smartdownRoot, 'index.html'), to: 'lib/' },
 
         { from: smartdownGallery, to: 'gallery/', ignore: galleryIgnores },
         { from: path.join(smartdown, '../../README.md'), to: 'gallery/' },
@@ -251,6 +212,28 @@ config.plugins.push(
     inject: 'head',
     baseUrl: baseURL
   }));
+
+config.plugins.push(new HtmlWebpackPlugin(
+  {
+    template: '../SimpleSiteExample/index.ejs',
+    inject: false,
+    filename: path.join(outputPath, 'lib/index.html'),
+    smartdownIndexTitle: 'Simple Smartdown Site',
+    smartdownRawPrefix: `window.location.origin + '${baseURL}gallery/'`,
+    smartdownBaseURL: baseURL,
+  }));
+
+config.plugins.push(new HtmlWebpackPlugin(
+  {
+    template: '../SimpleSiteExample/index.ejs',
+    inject: false,
+    filename: path.join(outputPath, 'gist/index.html'),
+    smartdownIndexTitle: 'Smartdown Gists',
+    smartdownDefaultHome: 'Gists',
+    smartdownRawPrefix: `window.location.origin + '${baseURL}gallery/'`,
+    smartdownBaseURL: baseURL,
+  }));
+
 
 switch (nodeEnvironment) {
   case 'production':

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <title><%= htmlWebpackPlugin.options.smartdownIndexTitle %></title>
+
+
+<!--   <script>
+    window.godownBase = 'https://rawgit.com/DoctorBud/godown/master/godown/';
+  </script>
+  <script src="https://rawgit.com/DoctorBud/godown/master/godown/godown.js"></script>
+ -->
+
+  <% if (typeof htmlWebpackPlugin.options.smartdownBaseURL === 'string'){ %>
+  <base href="<%= htmlWebpackPlugin.options.smartdownBaseURL %>">
+  <% } %>
+
+  <link
+    rel=stylesheet
+    href="fonts.css">
+  <link
+    rel=stylesheet
+    href="smartdown.css">
+
+  <script
+    src="smartdown.js">
+  </script>
+</head>
+
+<body
+  id="smartdown-outer-container"
+  class="smartdown-outer-container">
+  <div
+    class="smartdown-container"
+    id="smartdown-output">
+  </div>
+
+  <script src="calc_handlers.js"></script>
+
+  <script src="starter.js"></script>
+  <script>
+    window.smartdownResourceURL = '';
+    window.smartdownBaseURL = '/';
+
+    <% if (typeof htmlWebpackPlugin.options.smartdownBaseURL === 'string'){ %>
+
+    window.smartdownBaseURL = '<%= htmlWebpackPlugin.options.smartdownBaseURL %>';
+    window.smartdownResourceURL = '<%= htmlWebpackPlugin.options.smartdownBaseURL %>gallery/resources/';
+
+    <% } %>
+
+    <% if (typeof htmlWebpackPlugin.options.smartdownGistPathPrefix === 'string'){ %>
+    window.smartdownGistPathPrefix = '<%= htmlWebpackPlugin.options.smartdownGistPathPrefix %>';
+    <% } %>
+
+    <% if (typeof htmlWebpackPlugin.options.smartdownGistHashPrefix === 'string'){ %>
+    window.smartdownGistHashPrefix = '<%= htmlWebpackPlugin.options.smartdownGistHashPrefix %>';
+    <% } %>
+
+    <% if (typeof htmlWebpackPlugin.options.smartdownDefaultHome === 'string'){ %>
+    window.smartdownDefaultHome = '<%= htmlWebpackPlugin.options.smartdownDefaultHome %>';
+    <% } %>
+
+    <% if (typeof htmlWebpackPlugin.options.smartdownRawPrefix === 'string'){ %>
+    window.smartdownRawPrefix = <%= htmlWebpackPlugin.options.smartdownRawPrefix %>;
+    <% } %>
+
+    window.smartdownPostLoadMutator = function(sourceText, cardKey, cardURL, defaultHome) {
+      // console.log('smartdownPostLoadMutator', defaultHome);
+      if (cardKey === 'README') {
+        sourceText += '\n---\n\n[Back to Home](:@' + defaultHome + ')\n';
+      }
+
+      return sourceText;
+    };
+
+    window.smartdownStarter();
+  </script>
+
+</body>
+</html>
+
