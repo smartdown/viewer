@@ -228,6 +228,8 @@ config.plugins.push(new HtmlWebpackPlugin(
     template: '../SimpleSiteExample/index.ejs',
     inject: false,
     filename: path.join(outputPath, 'gist/index.html'),
+    smartdownGistHashPrefix: '',
+    smartdownGistPathPrefix: 'gist/',
     smartdownIndexTitle: 'Smartdown Gists',
     smartdownDefaultHome: 'Gists',
     smartdownRawPrefix: `window.location.origin + '${baseURL}gallery/'`,
