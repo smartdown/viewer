@@ -307,19 +307,6 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   overflow-y: scroll;
 }
 
-/*
-.smartdown-container .smartdown_p a > code {
-  border: 1px solid #BBE;
-  border-radius: 2px;
-  color: black;
-  padding: 2px;
-  background-color: white;
-  font-size: inherit;
-  font-family: 'Ubuntu Mono', monospace;
-  font-weight: 500;
-}
-*/
-
 .smartdown-container input[type="radio"],
 .smartdown-container input[type="checkbox"] {
   margin: 5px !important;
@@ -715,6 +702,12 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
 
 .smartdown-container .infocell-output.smartdown-svg {
   width:100%;
+}
+
+.smartdown-container .infocell-output.smartdown-code {
+  width:100% !important;
+  max-width:95vw !important;
+  padding:5px;
 }
 
 .smartdown-container .infocell-group .infocell-output {
@@ -1377,11 +1370,6 @@ img.media-image path {
 }
 */
 
-.smartdown-theme-dark .smartdown-container .MathJax_Display {
-  background:ghostwhite !important;
-  color: black;
-}
-
 .smartdown-container div.resp-iframe-container {
   position: relative;
   overflow: hidden;
@@ -1427,6 +1415,11 @@ img.media-image path {
 }
 
 /* smartdown-theme-dark theme */
+
+.smartdown-theme-dark .smartdown-container .MathJax_Display {
+  background:ghostwhite !important;
+  color: black;
+}
 
 .smartdown-outer-container.smartdown-theme-dark {
   margin:0;
@@ -1527,6 +1520,54 @@ img.media-image path {
 @media (min-width: 770px) {
 .smartdown-theme-chat .smartdown-container {
   font-size: 16px;
+  line-height: 1.35; /* 1.42857143; */
+}
+}
+
+/* Blog theme (for Celestial Toys) */
+
+.smartdown-outer-container.smartdown-theme-blog {
+  margin:0;
+  padding:0;
+}
+
+.smartdown-theme-blog .smartdown-container {
+  margin: 0;
+  background: rgb(251, 251, 254);
+  padding: 2px 4px;
+  font-family: 'Asap', san-serif;
+  font-size: 20px;
+  line-height: 1.3; /* 1.42857143; */
+}
+
+.smartdown-theme-blog .smartdown-container h1,
+.smartdown-theme-blog .smartdown-container .h1,
+.smartdown-theme-blog .smartdown-container h2,
+.smartdown-theme-blog .smartdown-container .h2,
+.smartdown-theme-blog .smartdown-container h3,
+.smartdown-theme-blog .smartdown-container .h3 {
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.smartdown-theme-blog .smartdown-container h4,
+.smartdown-theme-blog .smartdown-container .h4,
+.smartdown-theme-blog .smartdown-container h5,
+.smartdown-theme-blog .smartdown-container .h5,
+.smartdown-theme-blog .smartdown-container h6,
+.smartdown-theme-blog .smartdown-container .h6 {
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.smartdown-theme-blog p.smartdown_p {
+  margin: 4px 0;
+  padding: 0 0 0 4px;
+}
+
+@media (min-width: 770px) {
+.smartdown-theme-blog .smartdown-container {
+  font-size: 18px;
   line-height: 1.35; /* 1.42857143; */
 }
 }
