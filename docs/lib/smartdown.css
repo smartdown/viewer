@@ -121,6 +121,15 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   max-height: 100%;
   /* word-break: break-all; */
   word-wrap: break-word;
+  display:inline-block;
+}
+
+.smartdown-container div.smartdown-swatch {
+  vertical-align:middle;
+  display:inline-block;
+  height:1.3em;
+  width:1.3em;
+  border:1px dotted gray;
 }
 
 .smartdown-container br.smartdown_br {
@@ -467,6 +476,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 }
 
 .smartdown-container .btn-infocell {
+  line-height: 1em;
   display: inline-block;
   margin:1px 4px 1px 4px;
   padding: 3px 5px;
@@ -475,7 +485,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   font-weight: 500;
   text-align: center;
   white-space: nowrap;
-  vertical-align: middle;
+  vertical-align: text-bottom;
   touch-action: manipulation;
   cursor: pointer;
   -webkit-user-select: none;
@@ -616,7 +626,7 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
   resize:vertical;
   border:1px solid lightblue;
   margin: 0;
-  padding: 1px;
+  padding: 1px 4px;
   vertical-align: middle;
 }
 
@@ -624,7 +634,7 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
   font-size: inherit;
   vertical-align: middle;
   border:1px solid lightblue;
-  padding: 1px;
+  padding: 1px 4px;
 }
 
 .smartdown-container .infocell-group textarea.infocell-textarea {
@@ -697,7 +707,7 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
       -ms-user-select: text;
           user-select: text;
   margin:0;
-  padding: 1px;
+  padding: 1px 4px;
 }
 
 .smartdown-container .infocell-output.smartdown-svg {
@@ -891,8 +901,9 @@ img.media-image path {
 .smartdown-container .markdown table tbody tr td
 {
     margin: 0;
-    padding: 8px;
+    padding: 2px 4px;
     border:1px solid lightgray;
+    vertical-align: text-bottom;
 }
 
 .smartdown-container table td[align="left"] {
@@ -1412,6 +1423,13 @@ img.media-image path {
   margin-bottom: 10px;
 }
 
+.smartdown-container table thead tr th,
+.smartdown-container .markdown table thead tr th,
+.smartdown-container table tbody tr td,
+.smartdown-container .markdown table tbody tr td
+{
+    padding: 3px 6px;
+}
 }
 
 /* smartdown-theme-dark theme */
@@ -1536,8 +1554,8 @@ img.media-image path {
   background: rgb(251, 251, 254);
   padding: 2px 4px;
   font-family: 'Asap', san-serif;
-  font-size: 20px;
-  line-height: 1.3; /* 1.42857143; */
+  font-size: 18px;
+  line-height: 1.29; /* 1.42857143; */
 }
 
 .smartdown-theme-blog .smartdown-container h1,
@@ -1560,6 +1578,19 @@ img.media-image path {
   margin-bottom: 4px;
 }
 
+.smartdown-theme-blog .smartdown-container table thead tr th,
+.smartdown-theme-blog .smartdown-container .markdown table thead tr th,
+.smartdown-theme-blog .smartdown-container table tbody tr td,
+.smartdown-theme-blog .smartdown-container .markdown table tbody tr td
+{
+    padding: 1px 3px;
+}
+
+.smartdown-theme-blog .smartdown-container .btn-infocell {
+  margin:0 3px;
+  padding: 2px 4px;
+}
+
 .smartdown-theme-blog p.smartdown_p {
   margin: 4px 0;
   padding: 0 0 0 4px;
@@ -1567,7 +1598,7 @@ img.media-image path {
 
 @media (min-width: 770px) {
 .smartdown-theme-blog .smartdown-container {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.35; /* 1.42857143; */
 }
 }

@@ -213,7 +213,13 @@ Blog: [https://doctorbud.com](https://doctorbud.com)
 - **0.0.79** - Add Brython capability. Add explicit dynamic import capability. Reduce line-height for default text slightly. Add /debug qualifier to playable syntax to show augmented code. Use smartdown-gallery 0.0.6.
 - **0.0.80** - Fix bug with P5JS Global Mode. Refactor how augmented code is displayed and generated, so that P5JS augmentation occurs in registerPlayable, rather than waiting for playPlayable. Add smartdown.include syntax to enable the inclusion of external (not inline) playable code (usually JS code). Use __webpack_public_path__ to encourage the dynamic import of various libraries to use a colocated resource. Eliminate p5.exampleSound. Change smartdown.use to smartdown.import.
 - **0.0.81** - Revert marked from 0.4.0 to 0.3.19.
-- **0.0.82** - Fix how __webpack_public_path__ is configured so it works in all browsers.
+- **0.0.82** - Fix how __webpack_public_path__ is configured so it works in all browsers. Renamed global variables in index.js to be more sensible and clearly global. Add a smartdown.configure() method to replace the deprecated .initialize() method. .configure() is able to accept an options argument, rather than the positional arguments of .initialize(). Fix smartdown-theme-blog to use larger font-size/line-height on big screens. Workaround issue in Giffer's package.json.
+
+
+
+
+
+
 - **0.0.83** - Fix reentrancy/backpatch bug when rendering multiple divs that each contain smartdown.includes. Move per-playable state into its own object to reduce risk of unintended closure capture, which was a pain. Add halfwidth video size option. Add experimental YouTube Player IFrame API access to videos. Add importTextUrl() function. Add 'url' cell datatype. Use SD Gallery 0.0.8.
 - **0.0.84** - Update MathJax to 2.7.5. Style Play/Pause buttons in a less-colorful, but more readable and accessible way. smartdown-gallery 0.0.9. Add dc.fs to the d3 build configuration (yes, bundle size increases). Updates d3fc, p5js, plotly, and three.
 - **0.0.85** - Fix dcfc polyfill issue. Adjust styles for more readability. Make d3 and its associated libraries dynamically loadable, and not in the default bundle. Update marked.js to 5.0 and update smartdownLexer accordingly. Adjust calc_handlers.js so that it assumes its argument has been URIEncoded.
@@ -222,3 +228,7 @@ Blog: [https://doctorbud.com](https://doctorbud.com)
 - **0.0.88** - Fix README.md version history format. Update babel. Fix usage of stacktrace-js so that the minified version is used. Eliminate .babelrc-based config. Remove site/ example (moved to github.com:smartdown/viewer). Change smartdownBaseURL for SimpleSiteExample to use '/', which will support the spinoff Smartdown Viewer Site's ability to host the SimpleSiteExample and become smartdown.site. Fix the gist/ endpoint to deal with going backward in history to a non-gist URL. Eliminate hacky kludgesrc/ directory that was needed for reasons lost in time. Add vertical padding to Mathjax_Display to avoid scrollbars. Improve heuristic for setupScrollHoverDisable() so that slow scrolling does not inhibit pointer-events, but fast scrolling does.
 - **0.0.89** - Add thumbnail, halfwidth, and fullwidth options to image references.
 - **0.0.90** - Fix embedding of HTML within a Smartdown cell. Ensure that code infocells wrap rather than scrolling horizontally. Add smartdown-theme-blog for a more compact theme.
+- **0.0.91** - Fix infocell/json formatting to use more width. Add conditional use of local-forage, currently disabled by default. Relieved some of the ESLint errors, either by relaxing the .eslintrc or by fixing the problems. Added the idea of a 'swatch' image, which uses the keyword 'swatch' in the text of an image URL, and uses a CSS color expression in the href section, resulting in a small div with that color as background. Tightened up tables, and tightened up -theme-blog. Fixed media query in -theme-blog.
+
+
+
