@@ -21,7 +21,7 @@
     "bootstrap": "^4.1.3",
     "codemirror": "^5.41.0",
     "ng-file-upload": "^12.2.13",
-    "smartdown": "0.0.91",
+    "smartdown": "0.0.92",
     "smartdown-gallery": "0.0.15",
     "split.js": "^1.5.7",
     "webpack-bundle-analyzer": "^3.0.3"
@@ -33,7 +33,7 @@
     "@babel/preset-env": "^7.1.0",
     "babel-loader": "^8.0.4",
     "copy-webpack-plugin": "^4.5.4",
-    "css-loader": "^1.0.0",
+    "css-loader": "^1.0.1",
     "eslint": "^5.8.0",
     "eslint-config-google": "^0.11.0",
     "eslint-plugin-html": "^4.0.6",

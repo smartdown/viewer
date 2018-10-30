@@ -122,6 +122,8 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - 0.0.3 - Apply this site as smartdown.site via CNAME.
 - 0.0.4 - Upgrade to SD 0.0.89. Populate the /lib directory for legacy clients who expected smartdown.site/lib/ to be where SD lives.
 - 0.0.5 - Add SimpleSiteExample to gist/ and lib/ for compatibility with existing users of gist/ and lib/ on smartdown.site.
+- 0.0.6 - Update to SD 0.0.92. Fix target=_blank links to use rel=noopener.
+
 
 
 
