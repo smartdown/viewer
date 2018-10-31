@@ -230,6 +230,8 @@ Blog: [https://doctorbud.com](https://doctorbud.com)
 - **0.0.90** - Fix embedding of HTML within a Smartdown cell. Ensure that code infocells wrap rather than scrolling horizontally. Add smartdown-theme-blog for a more compact theme.
 - **0.0.91** - Fix infocell/json formatting to use more width. Add conditional use of local-forage, currently disabled by default. Relieved some of the ESLint errors, either by relaxing the .eslintrc or by fixing the problems. Added the idea of a 'swatch' image, which uses the keyword 'swatch' in the text of an image URL, and uses a CSS color expression in the href section, resulting in a small div with that color as background. Tightened up tables, and tightened up -theme-blog. Fixed media query in -theme-blog.
 - **0.0.92** - Use 'rel=noopener' for any 'target=_blank' links.
+- **0.0.93** - Undo an erroneous placement (v0.0.91) of an infocell-group span around an unlabeled textarea.
+
 
 
 
