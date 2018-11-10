@@ -186,3 +186,15 @@ div.container-fluid .row.smartdown-frame {
 .MathJax_Display svg {
   vertical-align: unset;
 }
+
+
+.smartdown-container .a-disclosable {
+  display: inline-block;
+  color: #639ad7 !important;
+}
+
+.smartdown-container .a-disclosable:hover {
+  text-decoration: none;
+  color: #337ab7 !important;
+  font-weight: bold;
+}

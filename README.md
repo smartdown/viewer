@@ -124,8 +124,7 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - 0.0.5 - Add SimpleSiteExample to gist/ and lib/ for compatibility with existing users of gist/ and lib/ on smartdown.site.
 - 0.0.6 - Update to SD 0.0.92. Fix target=_blank links to use rel=noopener.
 - 0.0.7 - Update to SD 0.0.93.
-
-
+- 0.0.8 - Update to SD 0.0.94. Add temporary 'important' CSS qualifer for Disclosable Tooltip-style links. Smartdown CSS needs a more-specific selector, or the Viewer needs to have a more relaxed selector for text color. This is a hack.
 
 
 

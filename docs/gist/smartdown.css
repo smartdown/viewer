@@ -606,6 +606,78 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
   height: auto;
 }
 
+.smartdown-container .btn-infocell.btn-infocell-disclosable {
+
+}
+
+.smartdown-container .a-disclosable {
+  display: inline-block;
+  color: #639ad7;
+}
+
+.smartdown-container .a-disclosable:hover {
+  text-decoration: none;
+  color: #337ab7;
+  font-weight: bold;
+}
+
+.smartdown-container .disclosable-content {
+  display: none;
+}
+
+.smartdown-container .disclosable-content.visible {
+  display: block;
+  border-left: 2px solid #DDD;
+  border-radius: 10px;
+  -webkit-animation: fadeIn 2s;
+          animation: fadeIn 2s;
+  padding: 5px 10px;
+}
+
+.smartdown-container .disclosable-content.popup {
+  display: block;
+  width: 33%;
+  border: 1px solid #999;
+  background-color: #FFF;
+  color: #337ab7;
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 0px;
+  overflow: auto;
+  position: relative;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.smartdown-container .disclosable-content.fixed {
+  display: block;
+  -webkit-animation: fadeIn 0.5s;
+          animation: fadeIn 0.5s;
+  border: 1px solid #999;
+  width: 50%;
+  left: 25%;
+  top: 25%;
+  overflow: auto;
+  position: fixed;
+  margin: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  outline: 9999px solid rgba(0,0,0,0.5);
+  background-color: #FFF;
+  padding: 10px 12px;
+}
+
+/* Add animation (fade in the popup) */
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
 .smartdown-container .infocell-group {
   position: relative;
   display: table;
