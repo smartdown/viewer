@@ -112,8 +112,8 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   font-family: 'Asap', san-serif;
   font-size: 18px;
   line-height: 1.4; /* 1.42857143; */
-  overflow-x: auto;
-  overflow-y: auto;
+  overflow-x: visible;
+  overflow-y: visible;
   resize:vertical;
   width: auto;
   height: auto;
@@ -309,6 +309,10 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .smartdown-container pre > code {
   background: inherit;
   border: none;
+
+  padding: 0;
+  font-size: 0.9em;
+  line-height: 0.9em;
 }
 
 .smartdown-container .pre-scrollable {
@@ -439,7 +443,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 
 /* disable selection/Copy of UIWebView */
 
-/* disable the IOS popup when long-press on a link */
+/* disable the IOS tooltip when long-press on a link */
 
 /*
 .smartdown-plotly *:not(input):not(textarea) {
@@ -610,12 +614,18 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
 
 }
 
-.smartdown-container .a-disclosable {
+.smartdown-container .infocell-tooltip-disclosable {
   display: inline-block;
   color: #639ad7;
 }
 
-.smartdown-container .a-disclosable:hover {
+.smartdown-container .infocell-tooltip-disclosable-wrapper {
+  display: inline;
+  padding: 20px;
+  margin: -20px;
+}
+
+.smartdown-container .infocell-tooltip-disclosable:hover {
   text-decoration: none;
   color: #337ab7;
   font-weight: bold;
@@ -627,26 +637,32 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
 
 .smartdown-container .disclosable-content.visible {
   display: block;
-  border-left: 2px solid #DDD;
-  border-radius: 10px;
   -webkit-animation: fadeIn 2s;
           animation: fadeIn 2s;
-  padding: 5px 10px;
+  background: aliceblue;
+  margin: -5px;
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-.smartdown-container .disclosable-content.popup {
+.smartdown-container .disclosable-content.tooltip {
   display: block;
-  width: 33%;
   border: 1px solid #999;
-  background-color: #FFF;
-  color: #337ab7;
-  font-size: 18px;
   border-radius: 5px;
-  margin: 0px;
+  background: aliceblue;
+  margin: 0;
+  padding: 10px;
   overflow: auto;
-  position: relative;
+  position: absolute;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-
+  font-size: 0.9em;
+  width: 50%;
+  width:500px !important;
+  height:500px !important;
+  z-index:9999 !important;
+  opacity: 1 !important;
 }
 
 .smartdown-container .disclosable-content.fixed {
@@ -666,7 +682,7 @@ fieldset[disabled] .smartdown-container .btn-infocell.focus {
   padding: 10px 12px;
 }
 
-/* Add animation (fade in the popup) */
+/* Add animation (fade in the tooltip) */
 
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}
@@ -1400,12 +1416,11 @@ img.media-image path {
   }
 }
 
-// https://www.thecssninja.com/css/pointer-events-60fps
+/*https://www.thecssninja.com/css/pointer-events-60fps*/
 
 .disable-hover,
 .disable-hover * {
   pointer-events: none !important;
-  outline:5px solid red !important;
 }
 
 .disable-hover .smartdown-container a.smartdown-link,
@@ -1448,15 +1463,10 @@ img.media-image path {
   overflow-y: auto !important;
 }
 
-/*.smartdown-container .MathJax {
-  border:1px solid red;
-}
-*/
-
 .smartdown-container div.resp-iframe-container {
   position: relative;
   overflow: hidden;
-  padding-top: 56.25%;
+  padding-top: 100%;
   height:0;
 }
 

@@ -188,13 +188,20 @@ div.container-fluid .row.smartdown-frame {
 }
 
 
-.smartdown-container .a-disclosable {
+.smartdown-container .infocell-tooltip-disclosable {
   display: inline-block;
   color: #639ad7 !important;
 }
 
-.smartdown-container .a-disclosable:hover {
+.smartdown-container .infocell-tooltip-disclosable:hover {
   text-decoration: none;
   color: #337ab7 !important;
   font-weight: bold;
+}
+
+.smartdown-container .disclosable-content.tooltip {
+  font-size: unset;
+  font-weight: unset;
+  font-family: unset;
+  line-height: unset;
 }

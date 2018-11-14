@@ -232,8 +232,6 @@ Blog: [https://doctorbud.com](https://doctorbud.com)
 - **0.0.92** - Use 'rel=noopener' for any 'target=_blank' links.
 - **0.0.93** - Undo an erroneous placement (v0.0.91) of an infocell-group span around an unlabeled textarea.
 - **0.0.94** - Add preliminary disclosable capability
-
-
-
+- **0.0.95** - Include gallery Disclosables card. Fix thrashing issues with tooltips by adding a wrapper span around the trigger to prevent premature collapse. Fix shareability bugs where a disclosable can't be triggered reliably from both a tooltip and a button. Move popup disclosable padding from JS code into a CSS class. Some ESLint errors fixed. Remove red-outline from disable-hover CSS style. Increase default width of tooltips to 50%. Standardize on internal name 'tooltip' over 'popup'.
 
 
