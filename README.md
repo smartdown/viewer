@@ -127,4 +127,5 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - 0.0.8 - Update to SD 0.0.94. Add temporary 'important' CSS qualifer for Disclosable Tooltip-style links. Smartdown CSS needs a more-specific selector, or the Viewer needs to have a more relaxed selector for text color. This is a hack.
 - 0.0.9 - Update to SD 0.0.95.
 - 0.0.10 - Update to SD 0.0.97.
+- 0.0.11 - SD 0.0.98.
 
