@@ -128,4 +128,6 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - 0.0.9 - Update to SD 0.0.95.
 - 0.0.10 - Update to SD 0.0.97.
 - 0.0.11 - SD 0.0.98.
+- 0.0.12 - SD 0.0.99. Use dist/ instead of docs/. Add publish.sh
+- 0.0.13 - SD 0.0.100. SD Gallery 0.0.20
 
