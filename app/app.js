@@ -25,7 +25,7 @@ import 'codemirror/mode/xml/xml.js';
 import MainController from './MainController.js';
 import HelpController from './HelpController.js';
 import smartdown from 'smartdownJS';
-import 'smartdownCalcHandlersJS';
+// import 'smartdownCalcHandlersJS';
 
 import 'smartdownCSS';
 import 'smartdownFontsCSS';

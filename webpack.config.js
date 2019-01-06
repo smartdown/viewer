@@ -27,6 +27,7 @@ var smartdown = path.join(smartdownRoot, 'lib/');
 var smartdownGallery = path.join(nm, 'smartdown-gallery/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
 var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
+// var smartdownCalcHandlersJS = path.join(app, 'calc_handlers.js');
 var smartdownCSS = path.join(smartdown, 'smartdown.css');
 var smartdownFontsCSS = path.join(smartdown, 'fonts.css');
 var noParse = [
@@ -98,6 +99,9 @@ var config = {
 
         { from: smartdownGallery, to: 'gallery/', ignore: galleryIgnores },
         { from: path.join(smartdown, '../../README.md'), to: 'gallery/' },
+        // { from: path.join(smartdown, '../../LICENSE.md'), to: 'gallery/' },
+        // { from: path.join(smartdown, '../../CODE_OF_CONDUCT.md'), to: 'gallery/' },
+        // { from: path.join(smartdown, '../../CONTRIBUTING.md'), to: 'gallery/' },
         // { from: path.join(smartdown, '../gallery/favicon.ico'), to: 'gallery/' },
       ]
     ),
@@ -248,6 +252,7 @@ switch (nodeEnvironment) {
       new UglifyJSPlugin({
         sourceMap: false,
         uglifyOptions: {
+          ecma: 8,
           output: {
             comments: false,
             beautify: false,

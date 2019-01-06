@@ -117,17 +117,18 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 
 ## Version History
 
-- 0.0.1 - First isolation from Smartdown's site/ directory.
-- 0.0.2 - Update to latest draft version of Smartdown 0.0.88
-- 0.0.3 - Apply this site as smartdown.site via CNAME.
-- 0.0.4 - Upgrade to SD 0.0.89. Populate the /lib directory for legacy clients who expected smartdown.site/lib/ to be where SD lives.
-- 0.0.5 - Add SimpleSiteExample to gist/ and lib/ for compatibility with existing users of gist/ and lib/ on smartdown.site.
-- 0.0.6 - Update to SD 0.0.92. Fix target=_blank links to use rel=noopener.
-- 0.0.7 - Update to SD 0.0.93.
-- 0.0.8 - Update to SD 0.0.94. Add temporary 'important' CSS qualifer for Disclosable Tooltip-style links. Smartdown CSS needs a more-specific selector, or the Viewer needs to have a more relaxed selector for text color. This is a hack.
-- 0.0.9 - Update to SD 0.0.95.
-- 0.0.10 - Update to SD 0.0.97.
-- 0.0.11 - SD 0.0.98.
-- 0.0.12 - SD 0.0.99. Use dist/ instead of docs/. Add publish.sh
-- 0.0.13 - SD 0.0.100. SD Gallery 0.0.20
+- **0.0.1** - First isolation from Smartdown's site/ directory.
+- **0.0.2** - Update to latest draft version of Smartdown 0.0.88
+- **0.0.3** - Apply this site as smartdown.site via CNAME.
+- **0.0.4** - Upgrade to SD 0.0.89. Populate the /lib directory for legacy clients who expected smartdown.site/lib/ to be where SD lives.
+- **0.0.5** - Add SimpleSiteExample to gist/ and lib/ for compatibility with existing users of gist/ and lib/ on smartdown.site.
+- **0.0.6** - Update to SD 0.0.92. Fix target=_blank links to use rel=noopener.
+- **0.0.7** - Update to SD 0.0.93.
+- **0.0.8** - Update to SD 0.0.94. Add temporary 'important' CSS qualifer for Disclosable Tooltip-style links. Smartdown CSS needs a more-specific selector, or the Viewer needs to have a more relaxed selector for text color. This is a hack.
+- **0.0.9** - Update to SD 0.0.95.
+- **0.0.10** - Update to SD 0.0.97.
+- **0.0.11** - SD 0.0.98.
+- **0.0.12** - SD 0.0.99. Use dist/ instead of docs/. Add publish.sh
+- **0.0.13** - SD 0.0.100. SD Gallery 0.0.20
+- **0.0.14** - SD 0.0.102. SD Gallery 0.0.22
 

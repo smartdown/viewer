@@ -136,7 +136,7 @@ export default class MainController {
     // https://lodash.com/docs/#throttle
     this.throttleEditSourceChanged = lodashThrottle(function() {
       that.editSourceChanged();
-    }, 1500, {
+    }, 500, {
       leading: false,
       trailing: true
     });
