@@ -131,4 +131,4 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.12** - SD 0.0.99. Use dist/ instead of docs/. Add publish.sh
 - **0.0.13** - SD 0.0.100. SD Gallery 0.0.20
 - **0.0.14** - SD 0.0.102. SD Gallery 0.0.22
-
+- **0.0.15** - SD 0.0.108. Ensure Smartdown API docs are available.

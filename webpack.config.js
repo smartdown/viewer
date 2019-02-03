@@ -24,6 +24,7 @@ var codemirrorJS = path.join(codemirror, '/lib/codemirror.js');
 var smartdownRoot = path.join(nm, 'smartdown/dist/');
 // var smartdownRoot = '/Users/bud/DoctorBud/smartdown/dist/';
 var smartdown = path.join(smartdownRoot, 'lib/');
+var smartdownDoc = path.join(smartdownRoot, 'doc/');
 var smartdownGallery = path.join(nm, 'smartdown-gallery/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
 var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
@@ -91,6 +92,7 @@ var config = {
         { from: '../CNAME' },
 
         { from: smartdown },
+        { from: smartdownDoc, to: 'smartdown/doc/' },
 
         { from: smartdown, to: 'lib/' },
         { from: smartdown, to: 'gist/' },
