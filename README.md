@@ -132,4 +132,5 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.13** - SD 0.0.100. SD Gallery 0.0.20
 - **0.0.14** - SD 0.0.102. SD Gallery 0.0.22
 - **0.0.15** - SD 0.0.111. SD Gallery 0.0.23. Ensure Smartdown API docs are available. Includes Decoration capability.
-
+- **0.0.16** - SD 0.0.112.
+- **0.0.17** - SD 0.0.113, Gallery 0.0.25 (DisclosablesPlus and Decorations)
