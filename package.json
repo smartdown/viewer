@@ -1,6 +1,6 @@
 {
   "name": "smartdown-viewer",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -23,20 +23,20 @@
     "bootstrap": "^4.3.1",
     "codemirror": "^5.44.0",
     "ng-file-upload": "^12.2.13",
-    "smartdown": "0.0.113",
+    "smartdown": "0.0.114",
     "smartdown-gallery": "0.0.25",
     "split.js": "^1.5.10",
-    "webpack-bundle-analyzer": "^3.0.4"
+    "webpack-bundle-analyzer": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
+    "@babel/core": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-modules-umd": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-env": "^7.3.4",
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
-    "eslint": "^5.14.1",
+    "eslint": "^5.15.0",
     "eslint-config-google": "^0.12.0",
     "eslint-plugin-html": "^5.0.3",
     "exports-loader": "^0.7.0",
@@ -49,11 +49,11 @@
     "json-loader": "^0.5.7",
     "raw-loader": "^1.0.0",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.1.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "ui-bootstrap4": "^3.0.6",
     "url-loader": "^1.1.2",
-    "webpack": "^4.29.5",
+    "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0"
+    "webpack-dev-server": "^3.2.1"
   }
 }
