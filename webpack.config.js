@@ -2,7 +2,7 @@ var webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
 var path = require('path');
 var fs = require('fs');
 
@@ -251,9 +251,9 @@ switch (nodeEnvironment) {
         debug: false
       }),
 
-      new UglifyJSPlugin({
+      new TerserJSPlugin({
         sourceMap: false,
-        uglifyOptions: {
+        terserOptions: {
           ecma: 8,
           output: {
             comments: false,
