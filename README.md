@@ -138,4 +138,4 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.19** - SD 0.0.115. Use Terser webpack plugin instead of UglifyJS.
 - **0.0.20** - SD 0.0.116. Gallery 0.0.26.
 - **0.0.21** - SD 0.0.117. Gallery 0.0.28.
-
+- **0.0.22** - SD 0.0.118. Gallery 0.0.29.
