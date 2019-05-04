@@ -141,3 +141,4 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.22** - SD 0.0.118. Gallery 0.0.29.
 - **0.0.23** - SD 1.0.0. Gallery 0.0.29.
 - **0.0.24** - SD 1.0.1. Gallery 0.0.30.
+- **0.0.25** - SD 1.0.2. Gallery 0.0.30.
