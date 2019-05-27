@@ -439,7 +439,12 @@ app.run(['$rootScope',
       }
     };
 
-    var linkRules = [];
+    let linkRules = [
+      {
+        prefix: '/resources/',
+        replace: '/gallery/resources/'
+      }
+    ];
     console.log('baseURL', baseURL);
     smartdown.initialize(icons, baseURL, loadExample, cardLoader, calcHandlers, linkRules);
   }]);

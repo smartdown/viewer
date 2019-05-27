@@ -296,11 +296,18 @@ export default class MainController {
             replace: replace + 'assets/'
           },
       ];
-      // console.log('linkRules', linkRules);
+      console.log('setLinkRules1', linkRules, that.inputURL);
       that.smartdown.setLinkRules(linkRules);
     }
     else {
-      that.smartdown.setLinkRules([]);
+      let linkRules = [
+        {
+          prefix: '/resources/',
+          replace: '/gallery/resources/'
+        }
+      ];
+      console.log('setLinkRules2[]', that.inputURL);
+      that.smartdown.setLinkRules(linkRules);
     }
 
     that.smartdown.setHome(source, renderElement, function() {
