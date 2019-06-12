@@ -352,46 +352,6 @@ app.run(['$rootScope',
       $rootScope.$broadcast('go-to-card', cardKey);
     }
 
-    var gistHashPrefix = 'gist/';
-
-/*
-    function getGistPrefix(href) {
-      var result = href;
-      var hash = window.location.hash;
-
-      if (gistHashPrefix.length > 0 && hash.indexOf('#' + gistHashPrefix) === 0) {
-        var re = `^#${gistHashPrefix}([^/]+)/([^/]+)(/(\\w*))?`;
-        var gistRE = new RegExp(re, 'g');
-        var match = gistRE.exec(hash);
-        if (match) {
-          let gistOrg = match[1];
-          let gistID = match[2];
-          result = `https://gist.githubusercontent.com/${gistOrg}/${gistID}/raw/`;
-        }
-      }
-
-      return result;
-    }
-    window.getGistPrefix = getGistPrefix;
-
-    let linkRules = [
-      {
-        prefix: '/block/',
-        replace: getGistPrefix
-      },
-      {
-        prefix: 'block/',
-        replace: getGistPrefix
-      },
-      {
-        prefix: '/resources/',
-        replace: baseURL === '' ?
-                  '/resources/' :
-                  baseURL + 'lib/resources/'
-      }
-    ];
-*/
-
     // DRY this up. Duplicate of MainController.js version
     const gistPrefix = 'https://gist.githubusercontent.com/';
     function shortenGistRawURL(url) {
@@ -403,11 +363,6 @@ app.run(['$rootScope',
       if (match) {
         result = `gist/${match[1]}/${match[2]}/${match[4]}.md`;
       }
-      // if (url.indexOf(gistPrefix) === 0) {
-      //   var shorterURL = gistHashPrefix + url.slice(gistPrefix.length);
-      //   console.log('shorterURL', url, shorterURL);
-      //   url = shorterURL;
-      // }
 
       return result;
     }

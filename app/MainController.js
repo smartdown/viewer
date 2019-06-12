@@ -2,7 +2,7 @@ import angular from 'angular';
 
 /* eslint new-cap: 0 */
 
-import Split from 'split.js'
+import Split from 'split.js';
 const lodashThrottle = require('lodash/throttle');
 
 var rawPrefix = window.location.origin;
@@ -12,7 +12,7 @@ var gistPathPrefix = '';
 var gistHashPrefix = 'gist/';
 var gistOrg = '';
 var gistID = '';
-var gistRE = new RegExp(`^/?${gistHashPrefix}([^/]+)/([^/]+)(/(\\w*))?(\.md)?$`, 'g');
+var gistRE = new RegExp(`^/?${gistHashPrefix}([^/]+)/([^/]+)(/(\\w*))?(.md)?$`, 'g');
 
 export default class MainController {
   // constructor arglist must match invocation in app.js
@@ -64,7 +64,8 @@ export default class MainController {
       autofocus: true,
       theme: 'neat',
       indentUnit: 2,
-      mode: 'markdown',
+      mode: 'text',
+      inputStyle: 'contenteditable',
       lineNumbers: true,
       lineWrapping: true,
       extraKeys: extraKeys,
@@ -73,61 +74,9 @@ export default class MainController {
       }
     };
 
-    // this.$scope.codemirrorLoaded = function(_editor) {
-    //     console.log('codemirrorLoaded', _editor);
-    //     that.codemirrorLoaded(_editor);
-    //   };
-
     this.$scope.$on('smartdown-loaded', function(event) {
-      /*
-      this.simpleMDEOptions = {
-        // https://github.com/NextStepWebs/simplemde-markdown-editor
-        // autoDownloadFontAwesome: false,
-        spellChecker: false,
-        autosave: {
-          enabled: true,
-          delay: 1000,
-          uniqueId: 'gosms'
-        },
-        indentWithTabs: false,
-        lineWrapping: false,
-        parsingConfig: {
-          allowAtxHeaderWithoutSpace: true,
-        },
-        previewRender: function(plainText, previewDiv) {
-          that.$timeout(function() {
-            that.smartdown.setHome(plainText, previewDiv);
-          }, 250);
-
-          return "Loading...";
-        }
-      };
-      */
-
-      /*
-      that.$timeout(function() {
-        var a = document.getElementById('myTextarea');
-        a.innerText = that.editSource;
-        var cmopts = {
-          // theme: 'monokai',
-          indentUnit: 2,
-          mode: 'markdown',
-          lineNumbers: false,
-          extraKeys: {'Enter': 'newlineAndIndentContinueMarkdownList'}
-        };
-        that.cm = CodeMirror.fromTextArea(a, cmopts);
-        that.cm.on('change', function() {
-          console.log('changesave1', that.cm.getTextArea().innerText);
-          that.cm.save();
-          console.log('changesave2', that.cm.getTextArea().innerText);
-        });
-
-      }, 500);
-      */
       that.loadDefault();
     });
-
-    // that.loadDefault();
 
     this.$scope.$watch('c.file', function () {
       that.loadFile(that.file);
@@ -171,20 +120,16 @@ export default class MainController {
     var that = this;
     this.showInputSource = !this.showInputSource;
     if (this.showInputSource) {
-      this.editSource = this.inputSource;
-      this.$timeout(function() {
-        that.editSourceChanged();
-        that.cmInstance.save();
-        that.cmInstance.refresh();
+      that.split = Split(['#split-left', '#split-right'], {
+        direction: 'horizontal',
+        minSize: 200,
+        sizes: [50, 50]
+      });
 
-        that.$timeout(function() {
-          that.split = Split(['#split-left', '#split-right'], {
-            direction: 'horizontal',
-            minSize: 200,
-            sizes: [50, 50]
-          });
-        }, 100);
-      }, 100);
+      this.$timeout(function() {
+        that.editSource = that.inputSource;
+        that.editSourceChanged();
+      }, 200);
     }
     else {
       this.$timeout(function() {
@@ -203,7 +148,9 @@ export default class MainController {
 
 
   codemirrorLoaded(_editor) {
+    // console.log('codemirrorLoaded', _editor);
     this.cmInstance = _editor;
+    this.cmInstance.focus();
 
     // // Editor part
     // var _doc = _editor.getDoc();
@@ -258,22 +205,21 @@ export default class MainController {
       const replace = prefix + '/';
 
       // FIXME: DRY up this code with respect to identical code in app.js
+      /* eslint-disable no-inner-declarations */
       function getGistPrefix(href) {
-        var result = that.lastLoadedRawPrefix;
-        var hash = window.location.hash;
+        let result = that.lastLoadedRawPrefix;
+        const hash = window.location.hash;
 
         if (gistHashPrefix.length > 0 && hash.indexOf('#' + gistHashPrefix) === 0) {
-          var re = `^#${gistHashPrefix}([^/]+)/([^/]+)(/(\\w*))?`;
-          var gistRE = new RegExp(re, 'g');
-          var match = gistRE.exec(hash);
+          const reSrc = `^#${gistHashPrefix}([^/]+)/([^/]+)(/(\\w*))?`;
+          const re = new RegExp(reSrc, 'g');
+          const match = re.exec(hash);
           if (match) {
-            let gistOrg = match[1];
-            let gistID = match[2];
-            result = `https://gist.githubusercontent.com/${gistOrg}/${gistID}/raw/`;
+            const org = match[1];
+            const id = match[2];
+            result = `https://gist.githubusercontent.com/${org}/${id}/raw/`;
           }
         }
-
-        // console.log('getGistPrefix', href, result, that.lastLoadedRawPrefix, hash);
 
         return result;
       }
@@ -296,7 +242,7 @@ export default class MainController {
             replace: replace + 'assets/'
           },
       ];
-      console.log('setLinkRules1', linkRules, that.inputURL);
+      // console.log('setLinkRules1', linkRules, that.inputURL);
       that.smartdown.setLinkRules(linkRules);
     }
     else {
@@ -306,7 +252,7 @@ export default class MainController {
           replace: '/gallery/resources/'
         }
       ];
-      console.log('setLinkRules2[]', that.inputURL);
+      // console.log('setLinkRules2[]', that.inputURL);
       that.smartdown.setLinkRules(linkRules);
     }
 
@@ -314,6 +260,9 @@ export default class MainController {
       that.smartdown.startAutoplay(renderElement);
       if (that.showInputSource) {
         //
+        window.setTimeout(function() {
+          that.cmInstance.refresh();
+        }, 20);
       }
       else {
         window.setTimeout(function() {
@@ -337,6 +286,7 @@ export default class MainController {
     });
   }
 
+
   shortenGistRawURL(url) {
     var result = url;
 
@@ -346,11 +296,6 @@ export default class MainController {
     if (match) {
       result = `gist/${match[1]}/${match[2]}/${match[4]}.md`;
     }
-    // if (url.indexOf(gistPrefix) === 0) {
-    //   var shorterURL = gistHashPrefix + url.slice(gistPrefix.length);
-    //   console.log('shorterURL', url, shorterURL);
-    //   url = shorterURL;
-    // }
 
     return result;
   }
@@ -383,10 +328,7 @@ export default class MainController {
       // this.$location.hash(hash); //  {url: url});
       // console.log('sethash:', this.$location.hash());
       var oldURL = window.location.pathname + window.location.hash;
-      var newURL =  // window.location.protocol +
-                    // window.location.host +
-                    window.location.pathname +
-                    suffix;
+      var newURL = window.location.pathname + suffix;
       // console.log('...push', cardKey, oldURL, newURL);
       if (newURL !== oldURL) {
         // console.log('###loadSource...url difference. push oldURL->newURL', oldURL, newURL);
