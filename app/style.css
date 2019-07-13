@@ -188,6 +188,11 @@ div.container-fluid .row.smartdown-frame {
 }
 
 
+.smartdown-outer-container,
+.smartdown-container {
+  width: 100%;
+}
+
 .smartdown-container .infocell-tooltip-disclosable {
   display: inline-block;
   color: #639ad7 !important;

@@ -119,6 +119,7 @@ export default class MainController {
   toggleInputSource() {
     var that = this;
     this.showInputSource = !this.showInputSource;
+
     if (this.showInputSource) {
       that.split = Split(['#split-left', '#split-right'], {
         direction: 'horizontal',
@@ -126,17 +127,18 @@ export default class MainController {
         sizes: [50, 50]
       });
 
+      that.editSource = that.inputSource;
+
       this.$timeout(function() {
-        that.editSource = that.inputSource;
-        that.editSourceChanged();
+        that.cmInstance.refresh();
+        that.cmInstance.focus();
       }, 200);
     }
     else {
       this.$timeout(function() {
         that.editSourceChanged();
         that.cmInstance.save();
-        that.cmInstance.refresh();
-
+        // that.cmInstance.refresh();
         if (that.split) {
           that.split.destroy();
           that.split = null;
@@ -189,7 +191,6 @@ export default class MainController {
 
   editSourceChanged() {
     if (this.editSource && (this.inputSource !== this.editSource)) {
-      // console.log('editSourceChanged', this.inputSource.slice(-20), this.editSource.slice(-20), this.inputTitle, this.inputURL);
       this.loadSource(this.editSource, this.inputTitle, this.inputURL);
     }
   }
@@ -262,21 +263,16 @@ export default class MainController {
         //
         window.setTimeout(function() {
           that.cmInstance.refresh();
-        }, 20);
+        }, 10);
       }
       else {
         window.setTimeout(function() {
           document.body.scrollTop = 0; // For Chrome, Safari and Opera
           document.documentElement.scrollTop = 0; // For IE and Firefox
-        }, 20);
+        }, 10);
       }
 
       if (!that.watchEditEnabled) {
-        // window.setTimeout(function() {
-        //   document.body.scrollTop = 0; // For Chrome, Safari and Opera
-        //   document.documentElement.scrollTop = 0; // For IE and Firefox
-        // }, 20);
-
         that.watchEditEnabled = true;
         that.$scope.$watch('c.editSource', function () {
           that.throttleEditSourceChanged();

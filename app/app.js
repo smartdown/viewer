@@ -213,6 +213,7 @@ function uiCodemirrorDirective($timeout, uiCodemirrorConfig) {
       // Skip the initial watch firing
       if (newVal !== oldVal) {
         $timeout(function() {
+          console.log('uiRefreshAttr');
           codeMirror.refresh();
         });
       }
