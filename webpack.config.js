@@ -27,6 +27,7 @@ var smartdown = path.join(smartdownRoot, 'lib/');
 var smartdownDoc = path.join(smartdownRoot, 'doc/');
 // var smartdownGallery = '/Users/bud/DoctorBud/smartdown-gallery/';
 var smartdownGallery = path.join(nm, 'smartdown-gallery/');
+var smartdownGalleryRsrc = path.join(nm, 'smartdown-gallery/resources/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
 var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
 // var smartdownCalcHandlersJS = path.join(app, 'calc_handlers.js');
@@ -55,7 +56,11 @@ var galleryIgnores = [
   'package.json',
   'index.html',
   'AAADebug.md',
-  'ExtensionsPlayableP5X.js'];
+  'DBpedia.md',
+  'ExtensionsPlayableP5X.js',
+  'LDFPic.md',
+  'MusicTest.md',
+  'Wikidata.md'];
 
 var config = {
   mode: nodeEnvironment,
@@ -101,6 +106,8 @@ var config = {
         // { from: path.join(smartdownRoot, 'index.html'), to: 'lib/' },
 
         { from: smartdownGallery, to: 'gallery/', ignore: galleryIgnores },
+        { from: path.join(smartdownGallery, 'LDF.md') },
+        { from: smartdownGalleryRsrc, to: 'resources/' },
         { from: path.join(smartdown, '../../README.md'), to: 'gallery/' },
         // { from: path.join(smartdown, '../../LICENSE.md'), to: 'gallery/' },
         // { from: path.join(smartdown, '../../CODE_OF_CONDUCT.md'), to: 'gallery/' },
