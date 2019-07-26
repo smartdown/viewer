@@ -146,4 +146,5 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.27** - SD 1.0.5. Gallery 0.0.33. Update dependencies. Fix CodeMirror problem where cursor is misaligned and you can't enter more than 3 characters.
 - **0.0.28** - SD 1.0.8. Gallery 0.0.37 (jsPsych).
 - **0.0.29** - Gallery 0.0.39
+- **0.0.30** - Gallery 0.0.40, SD 1.0.9
 
