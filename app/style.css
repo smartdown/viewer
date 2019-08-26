@@ -187,11 +187,20 @@ div.container-fluid .row.smartdown-frame {
   vertical-align: unset;
 }
 
+/* duplicate from smartdown's SCSS, translated to CSS */
 
-.smartdown-outer-container,
-.smartdown-container {
+.smartdown-outer-container {
+  margin: 0;
+  padding: 0;
   width: 100%;
+  background: rgb(250, 250, 255);
 }
+
+.smartdown-outer-container > div.smartdown-container {
+  margin: 0 !important;
+  padding: 5px 10px 5px 15px !important;
+}
+
 
 .smartdown-container .infocell-tooltip-disclosable {
   display: inline-block;
