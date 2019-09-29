@@ -194,6 +194,7 @@ div.container-fluid .row.smartdown-frame {
   padding: 0;
   width: 100%;
   background: rgb(250, 250, 255);
+  overflow: visible !important;
 }
 
 .smartdown-outer-container > div.smartdown-container {

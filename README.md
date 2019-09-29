@@ -150,4 +150,4 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.31** - Gallery 0.0.41, SD 1.0.11
 - **0.0.32** - Gallery 0.0.41, SD 1.0.12
 - **0.0.33** - Gallery 0.0.42, SD 1.0.13. Add more padding to smartdown-outer-container.
-
+- **0.0.34** - Gallery 0.0.43, SD 1.0.14. Update deps.
