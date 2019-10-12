@@ -152,4 +152,6 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.33** - Gallery 0.0.42, SD 1.0.13. Add more padding to smartdown-outer-container.
 - **0.0.34** - Gallery 0.0.43, SD 1.0.14. Update deps.
 - **0.0.35** - Gallery 0.0.44 SD 1.0.16. Update deps.
-- **0.0.36** - Gallery 0.0.45 SD 1.0.17. Update deps.
+- **0.0.36** - Gallery 0.0.46 SD 1.0.18. Update deps. Simplify TerserWebpackPlugin options and avoid mangle.keep_fnames=true.
+
+

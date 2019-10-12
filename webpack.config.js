@@ -2,7 +2,7 @@ var webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 var path = require('path');
 var fs = require('fs');
 
@@ -25,8 +25,8 @@ var codemirrorJS = path.join(codemirror, '/lib/codemirror.js');
 var smartdownRoot = path.join(nm, 'smartdown/dist/');
 var smartdown = path.join(smartdownRoot, 'lib/');
 var smartdownDoc = path.join(smartdownRoot, 'doc/');
-// var smartdownGallery = '/Users/bud/DoctorBud/smartdown-gallery/';
-var smartdownGallery = path.join(nm, 'smartdown-gallery/');
+var smartdownGallery = '/Users/bud/DoctorBud/smartdown-gallery/';
+// var smartdownGallery = path.join(nm, 'smartdown-gallery/');
 var smartdownGalleryRsrc = path.join(nm, 'smartdown-gallery/resources/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
 var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
@@ -259,23 +259,26 @@ switch (nodeEnvironment) {
         debug: false
       }),
 
-      new TerserJSPlugin({
-        sourceMap: false,
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false, // Must be set to true if using source-maps in production
         terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
           ecma: 8,
           output: {
             comments: false,
             beautify: false,
           },
-          mangle: {
-            keep_fnames: true
-          },
+          // mangle: {
+          //   keep_fnames: true
+          // },
           compress: {
             warnings: true,
           },
           comments: false
         }
-      })
+      }),
     );
 
     config.output.filename = '[name].js';

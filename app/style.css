@@ -164,9 +164,8 @@ div.container-fluid .row.control-panel {
 }
 
 div.container-fluid .row.smartdown-frame {
-  background: aliceblue;
+  background: #fafaff;
   margin-top: 70px;
-  xpadding: 10px;
 }
 
 .btn-group-xs > .btn,
@@ -187,36 +186,7 @@ div.container-fluid .row.smartdown-frame {
   vertical-align: unset;
 }
 
-/* duplicate from smartdown's SCSS, translated to CSS */
-
-.smartdown-outer-container {
+.smartdown-outer-container.source-visible {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  background: rgb(250, 250, 255);
-  overflow: visible !important;
 }
 
-.smartdown-outer-container > div.smartdown-container {
-  margin: 0 !important;
-  padding: 5px 10px 5px 15px !important;
-}
-
-
-.smartdown-container .infocell-tooltip-disclosable {
-  display: inline-block;
-  color: #639ad7 !important;
-}
-
-.smartdown-container .infocell-tooltip-disclosable:hover {
-  text-decoration: none;
-  color: #337ab7 !important;
-  font-weight: bold;
-}
-
-.smartdown-container .disclosable-content.tooltip {
-  font-size: unset;
-  font-weight: unset;
-  font-family: unset;
-  line-height: unset;
-}
