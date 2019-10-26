@@ -155,7 +155,7 @@ div.container-fluid .row.control-panel {
   margin: 0;
   padding: 5px 0 2px 0;
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   background:white;
   left: 0;
   top: 0;
@@ -190,3 +190,13 @@ div.container-fluid .row.smartdown-frame {
   margin: 0;
 }
 
+
+.smartdown-container
+.playable-wrapper-wrapper
+.playable-wrapper.smartdown-playable-kiosk.playable-playing
+.playable-buttons {
+  top: 70px;
+  left: 0;
+  right: 0;
+  margin: 0 12px;
+}
