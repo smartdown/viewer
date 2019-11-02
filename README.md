@@ -155,5 +155,7 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.36** - Gallery 0.0.46 SD 1.0.18. Update deps. Simplify TerserWebpackPlugin options and avoid mangle.keep_fnames=true.
 - **0.0.37** - Gallery 0.0.47, SD 1.0.19.
 - **0.0.38** - Gallery 0.0.48, SD 1.0.20
+- **0.0.39** - Gallery 0.0.49, SD 1.0.21.
+- **0.0.40** - Gallery 0.0.50, SD 1.0.23.
 
 
