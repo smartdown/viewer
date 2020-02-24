@@ -14,7 +14,7 @@ Although Smartdown will eventually have all of its source code published and lic
 
 ### Local Smartdown Viewing
 
-The examples in [Smartdown Site Gallery](https://github.com/DoctorBud/smartdown/tree/master/SimpleSiteExample/gallery) can be run by using an HTTP server and basing the server's root such that `/` refers to your downloaded `smartdown/docs/` directory. This same directory is served via GitHub Pages at [Smartdown Gallery](http://smartdown.site/?url=gallery/Home.md).
+The examples in [Smartdown Site Gallery](https://github.com/DoctorBud/smartdown/tree/master/SimpleSiteExample/gallery) can be run by using an HTTP server and basing the server's root such that `/` refers to your downloaded `smartdown/docs/` directory. This same directory is served via GitHub Pages at [Smartdown Gallery](http://smartdown.site/#gallery/Home.md).
 
 In order to test locally, you will need an HTTP server and will need to arrange for it to deliver `smartdown/docs` as `/`, to correspond with the expectations of GitHub Pages.
 
@@ -80,7 +80,7 @@ A remote Smartdown file can be loaded via URL.
 
 The `smartdown-viewer` app is designed so that the URL pointing to the app can be amended with an optional `url` parameter that points to a Smartdown file, subject to the same restrictions as Load URL above. For example, suppose this app is hosted on [http://smartdown.site](http://smartdown.site) and a desired Smartdown file is hosted on [http://www.example.com/MySmartdownFile.md](http://www.example.com/MySmartdownFile.md). Then the following URL will launch the smartdown-viewer app and cause it to load and render the specified file:
 
-> [http://smartdown.site?url=http://www.example.com/MySmartdownFile.md](http://smartdown.site?url=http://www.example.com/MySmartdownFile.md)
+> [http://smartdown.site/#http://www.example.com/MySmartdownFile.md](http://smartdown.site/#http://www.example.com/MySmartdownFile.md)
 
 ## Requirements to build
 
@@ -162,4 +162,6 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.43** - Gallery 0.0.57, SD 1.0.30.
 - **0.0.44** - SD 1.0.35. Gallery 0.0.61.
 - **0.0.45** - SD 1.0.38. Gallery 0.0.63.
-- **0.0.46** - SD 1.0.39. Gallery 0.0.64. 
+- **0.0.46** - SD 1.0.39. Gallery 0.0.64.
+- **0.0.47** - SD 1.0.40. Gallery 0.0.65. Adds support for subhashes within a page. General cleanup.
+

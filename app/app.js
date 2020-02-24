@@ -1,9 +1,6 @@
 import angular from 'angular';
-// import './bootswatch-simplex.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/css/bootstrap-reboot.min.css';
-// import './bootswatch-spacelab.min.css';
 import nguibootstrap from 'ui-bootstrap4';
 
 import ngResource from 'angular-resource';
@@ -25,7 +22,6 @@ import 'codemirror/mode/xml/xml.js';
 import MainController from './MainController.js';
 import HelpController from './HelpController.js';
 import smartdown from 'smartdownJS';
-// import 'smartdownCalcHandlersJS';
 
 import 'smartdownCSS';
 import 'smartdownFontsCSS';
@@ -75,50 +71,6 @@ app.controller(
     return new HelpController($http, $uibModalInstance, modalInfo);
   }]);
 
-
-/*
-ng.module('simplemde', []).directive('simplemde', [
-  '$parse', function($parse) {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      controller: ['$scope', function($scope) {
-        return {
-          get: function() {
-            return $scope.simplemde.instance;
-          },
-          rerenderPreview: function(val) {
-            return $scope.simplemde.rerenderPreview(val);
-          }
-        };
-      }],
-      link: function(scope, element, attrs, ngModel) {
-        var options, rerenderPreview;
-        options = $parse(attrs.simplemde)(scope) || {};
-        options.element = element[0];
-        var mde = new SimpleMDE(options);
-        mde.codemirror.on('change', function() {
-          scope.$applyAsync(function() {
-            ngModel.$setViewValue(mde.value());
-          });
-        });
-        ngModel.$render = function() {
-          var val = ngModel.$modelValue || options.default;
-          mde.value(val);
-          if (mde.isPreviewActive()) {
-            rerenderPreview(val);
-          }
-        };
-        rerenderPreview = function(val) {};
-        scope.simplemde = {
-          instance: mde,
-          rerenderPreview: rerenderPreview
-        };
-      }
-    };
-  }
-]);
-*/
 
 
 // https://github.com/angular-ui/ui-codemirror
@@ -344,56 +296,14 @@ app.run(['$rootScope',
     };
 
     calcHandlers = smartdown.defaultCalcHandlers;
-    function loadExample() {
+    function smartdownIsLoaded() {
       $rootScope.$broadcast('smartdown-loaded');
     }
 
     function cardLoader(cardKey) {
-      // console.log('cardLoader', cardKey);
+      console.log('cardLoader', cardKey);
       $rootScope.$broadcast('go-to-card', cardKey);
     }
-
-    // DRY this up. Duplicate of MainController.js version
-    const gistPrefix = 'https://gist.githubusercontent.com/';
-    function shortenGistRawURL(url) {
-      var result = url;
-
-      var gistRawRE = new RegExp(`^${gistPrefix}([^/]+)/([^/]+)/raw/([^/]+)/(\\w*).md`, 'g');
-      var match = gistRawRE.exec(url);
-
-      if (match) {
-        result = `gist/${match[1]}/${match[2]}/${match[4]}.md`;
-      }
-
-      return result;
-    }
-
-
-    window.onpopstate = function(event) {
-      const urlSearchPrefix = '?url=';
-      if ((document.location.origin === window.location.origin) &&
-          (document.location.pathname === window.location.pathname)) {
-        const search = window.location.search;
-        const hash = window.location.hash;
-        const re = /^\?url=lib\/gallery\/(\w+)\.md$/;
-        const match = search.match(re);
-        let url = window.location.origin + window.location.pathname + search + document.location.hash;
-        if (match) {
-          url = match[1];
-        }
-        else if (search.indexOf(urlSearchPrefix) === 0) {
-          url = search.slice(urlSearchPrefix.length);
-        }
-        else if (hash.indexOf('#') === 0) {
-          url = hash.slice(1);
-          url = shortenGistRawURL(url);
-        }
-
-        console.log('onpopstate', url, search, hash, match, document.location.origin, document.location.pathname);
-
-        $rootScope.$broadcast('go-to-card', url);
-      }
-    };
 
     let linkRules = [
       {
@@ -402,6 +312,6 @@ app.run(['$rootScope',
       }
     ];
     console.log('baseURL', baseURL);
-    smartdown.initialize(icons, baseURL, loadExample, cardLoader, calcHandlers, linkRules);
+    smartdown.initialize(icons, baseURL, smartdownIsLoaded, cardLoader, calcHandlers, linkRules);
   }]);
 

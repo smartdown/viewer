@@ -21,7 +21,7 @@ export default class MainController {
     this.lastLoadedRawPrefix = rawPrefix;
     this.watchEditEnabled = false;
     this.editSource = null;
-    this.inhibitHash = '';
+    this.rootHash = '';
     this.smartdown = window.smartdown;
     this.$scope = $scope;
     this.$resource = $resource;
@@ -90,14 +90,40 @@ export default class MainController {
       trailing: true
     });
 
+    // Navigation
+
     this.$scope.$on('go-to-card', function(event, cardKey) {
-      // console.log('go-to-card', cardKey, event);
+      console.log('go-to-card', cardKey, event);
       if (that.showInputSource) {
         that.hideEditor();
       }
       that.loadURL(cardKey);
     });
+
+    window.onhashchange = function() {
+      console.log('onhashchange');
+    };
+
+    window.onpopstate = function(event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      let cardKey = window.location.href;
+      console.log('onpopstate cardKey', cardKey, that.lastLoadedRawPrefix);
+
+      if (cardKey.indexOf(that.lastLoadedRawPrefix) === 0) {
+        cardKey = cardKey.slice(that.lastLoadedRawPrefix.length + 1);
+        console.log('...strip lastLoadedRawPrefix', cardKey);
+      }
+
+      if (cardKey.indexOf('#SD_') === 0) {
+        cardKey = that.rootHash + cardKey;
+        console.log('...insert before subhash', cardKey);
+      }
+
+      $scope.$broadcast('go-to-card', cardKey);
+    };
   }
+
 
   hideEditor() {
     var that = this;
@@ -148,54 +174,7 @@ export default class MainController {
     }
   }
 
-
-  codemirrorLoaded(_editor) {
-    // console.log('codemirrorLoaded', _editor);
-    this.cmInstance = _editor;
-    this.cmInstance.focus();
-
-    // // Editor part
-    // var _doc = _editor.getDoc();
-    // _editor.focus();
-
-    // // Options
-    // _editor.setOption('firstLineNumber', 10);
-    // _doc.markClean();
-
-    // // Events
-    // _editor.on("beforeChange", function(){ ... });
-    // _editor.on("change", function(){ ... });
-  }
-
-
-  setError(error) {
-    this.errorMessage = error;
-    this.inputURL = '';
-    this.inputSource = '';
-  }
-
-  showHelp() {
-    var that = this;
-    var modalInstance = this.$uibModal.open({
-      animation: this.animationsEnabled,
-      templateUrl: 'Help.tpl.html',
-      controller: 'HelpController',
-      controllerAs: 'help',
-      resolve: {
-        modalInfo: function () {
-          return that.modalInfo;
-        }
-      }
-    });
-  }
-
-  editSourceChanged() {
-    if (this.editSource && (this.inputSource !== this.editSource)) {
-      this.loadSource(this.editSource, this.inputTitle, this.inputURL);
-    }
-  }
-
-  renderInput(source) {
+  renderInput(source, subHash) {
     // console.log('renderInput', source.slice(0, 30), this.inputURL);
     var that = this;
     var renderElement = document.getElementById('InputRender');
@@ -258,6 +237,10 @@ export default class MainController {
     }
 
     that.smartdown.setHome(source, renderElement, function() {
+      if (subHash) {
+        console.log('setHome subhash', subHash, window.location.hash, `#${that.rootHash}${subHash}`);
+        window.history.pushState(null, subHash, `#${that.rootHash}${subHash}`);
+      }
       that.smartdown.startAutoplay(renderElement);
       if (that.showInputSource) {
         //
@@ -269,6 +252,13 @@ export default class MainController {
         window.setTimeout(function() {
           document.body.scrollTop = 0; // For Chrome, Safari and Opera
           document.documentElement.scrollTop = 0; // For IE and Firefox
+          if (subHash) {
+            const target = document.getElementById(subHash.slice(1));
+            if (target) {
+              console.log('scroll', subHash);
+              target.scrollIntoView();
+            }
+          }
         }, 10);
       }
 
@@ -297,8 +287,8 @@ export default class MainController {
   }
 
 
-  loadSource(source, cardKey, url) {
-    // console.log('loadSource', source.slice(-20), cardKey, url);
+  loadSource(source, cardKey, url, subHash) {
+    console.log('loadSource', source.slice(-20), cardKey, url, subHash);
     this.inputSource = source;
     this.inputTitle = cardKey;
     // this.editSource = source;
@@ -331,7 +321,6 @@ export default class MainController {
 
         window.history.pushState(stateObj, cardKey, newURL);
       }
-      // this.$location.search({url: url});
     }
 
     this.multiparts = this.smartdown.partitionMultipart(this.inputSource);
@@ -347,7 +336,7 @@ export default class MainController {
       partSource += backToHome;
     }
 
-    this.renderInput(partSource);
+    this.renderInput(partSource, subHash);
   }
 
   loadSourcePart(source, cardKey) {
@@ -355,14 +344,17 @@ export default class MainController {
   }
 
 
-  loadAsyncCard(cardKey, cardURL) {
+  loadAsyncCard(cardKey, cardURL, subHash) {
+    console.log('loadAsyncCard', cardKey, cardURL, subHash);
     var that = this;
 
     that.$http.get(cardURL, {withCredentials: false}).then(
       function(result) {
-        // console.log('loadAsyncCard success', cardURL, cardKey, result.data.slice(0, 40));
+        console.log('loadAsyncCard success', cardURL, cardKey, result.data.slice(0, 40));
         that.inputURL = cardURL;
-        that.loadSource(result.data, cardKey, cardURL);
+        that.rootHash = cardKey;
+
+        that.loadSource(result.data, cardKey, cardURL, subHash);
       },
       function(error) {
         console.log('loadAsyncCard error', cardURL, cardKey, error);
@@ -371,8 +363,8 @@ export default class MainController {
     );
   }
 
-  loadURL(cardKey, title) {
-    // console.log('loadURL', cardKey, title);
+  loadURL(cardKey) {
+    console.log('loadURL', cardKey, this.rootHash);
     this.hideEditor();
     var that = this;
 
@@ -382,19 +374,25 @@ export default class MainController {
     }
     else {
       cardKey = this.shortenGistRawURL(cardKey);
+      console.log('cardKey...', cardKey, this.lastLoadedRawPrefix, this.rootHash);
 
-      var match = gistRE.exec(cardKey);
-      if (match) {
-        gistOrg = match[1];
-        gistID = match[2];
-        var newCardKey = match[4] || defaultHome;
-        cardKey = newCardKey;
+      let subHash = null;
+      const subHashIndex = cardKey.indexOf('#SD_');
+      if (subHashIndex >= 0) {
+        subHash = cardKey.slice(subHashIndex);
+        cardKey = cardKey.slice(0, subHashIndex);
+        console.log('...subhash found', subHash, cardKey);
       }
 
-      if (cardKey.indexOf(rawPrefix) === 0) {
-        console.log('.....fixup cardkey', rawPrefix, cardKey);
-        cardKey = defaultHome;
+      if (cardKey.indexOf(that.lastLoadedRawPrefix) === 0) {
+        cardKey = cardKey.slice(that.lastLoadedRawPrefix.length + 1);
+        console.log('...trim lastLoadedRawPrefix', cardKey);
       }
+
+      if (cardKey.indexOf('#') === 0) {
+        cardKey = cardKey.slice(1);
+      }
+      console.log('...trim leading hash', cardKey);
 
       if (cardKey.indexOf('http') === 0) {
         gistOrg = '';
@@ -402,18 +400,19 @@ export default class MainController {
 
         var endOfPath = cardKey.lastIndexOf('/');
         if (endOfPath > 0) {
-          this.lastLoadedRawPrefix = cardKey.slice(0, endOfPath + 1);
+          this.lastLoadedRawPrefix = cardKey.slice(0, endOfPath);
+          console.log('...lastLoadedRawPrefix', this.lastLoadedRawPrefix);
         }
-        // console.log('...lastLoadedRawPrefix1', endOfPath, cardKey, that.lastLoadedRawPrefix);
 
-        that.loadAsyncCard(cardKey, cardKey);
+        that.loadAsyncCard(cardKey, cardKey, subHash);
       }
       else if (cardKey.indexOf('gallery/') === 0) {
         gistOrg = '';
         gistID = '';
         that.lastLoadedRawPrefix = rawPrefix;
-        // console.log('...lastLoadedRawPrefix2', cardKey, that.lastLoadedRawPrefix);
-        that.loadAsyncCard(cardKey, cardKey);
+        that.rootHash = cardKey;
+        console.log('...adjust rawPrefix/rootHash', rawPrefix, cardKey);
+        that.loadAsyncCard(cardKey, cardKey, subHash);
       }
       else if (gistOrg !== '' && gistID !== '') {
         var gistAPIBase = `https://api.github.com/gists/${gistID}`;
@@ -427,7 +426,7 @@ export default class MainController {
             var gistFileURL = gistFile.raw_url;
             cardKey = `${gistHashPrefix}${gistOrg}/${gistID}/${cardKey}`;
             // console.log('...lastLoadedRawPrefix3', cardKey, gistFileURL);
-            that.loadAsyncCard(cardKey, gistFileURL);
+            that.loadAsyncCard(cardKey, gistFileURL, subHash);
           }
           else {
             console.log('gistResponse', gistResponse);
@@ -439,17 +438,25 @@ export default class MainController {
       else {
         gistOrg = '';
         gistID = '';
-        var suffix = (cardKey === '') ? '' : (cardKey + '.md');
-
+        console.log('this.lastLoadedRawPrefix !== rawPrefix', this.lastLoadedRawPrefix, rawPrefix);
         if (this.lastLoadedRawPrefix !== rawPrefix) {
-          var cardURL = this.lastLoadedRawPrefix + suffix;
-          // console.log('defaultCard1', this.lastLoadedRawPrefix, cardKey, cardURL);
-          that.loadAsyncCard(cardKey, cardURL);
+          const cardURL = this.lastLoadedRawPrefix + suffix;
+          console.log('defaultCard1', this.lastLoadedRawPrefix, cardKey, cardURL);
+          that.loadAsyncCard(cardKey, cardURL, subHash);
         }
         else {
-          var cardURL = 'gallery/' + cardKey + '.md';
-          // console.log('defaultCard2', cardKey, cardURL);
-          that.loadAsyncCard(cardKey, cardURL);
+          let cardURL = 'gallery/' + cardKey + '.md';
+          if (subHash) {
+            cardURL = cardKey;
+            console.log('leave rootHash along with subhash ', that.rootHash, subHash);
+          }
+          else {
+            that.rootHash = cardURL;
+            // cardURL = cardKey = that.rootHash;
+            console.log('adjust rootHash ', that.rootHash);
+          }
+          console.log('defaultCard2', cardKey, cardURL, that.rootHash, subHash);
+          that.loadAsyncCard(cardURL, cardURL, subHash);
         }
       }
     }
@@ -459,7 +466,7 @@ export default class MainController {
     if (source) {
       // console.log('loadSourceItem', source.slice(-20), title, url);
       this.hideEditor();
-      this.loadSource(source, title, url);
+      this.loadSource(source, title, url, null);
     }
     else {
       // console.log('loadSourceItem loadURL', url);
@@ -469,14 +476,8 @@ export default class MainController {
 
   loadDefault() {
     var that = this;
-    var search = window.location.search;
     var hash = window.location.hash;
-    if (search && search.indexOf('?url=') === 0) {
-      search = search.slice(5);
-      // console.log('loadDefault url', search);
-      that.loadURL(search);
-    }
-    else if (hash && hash.indexOf('#') === 0) {
+    if (hash && hash.indexOf('#') === 0) {
       hash = hash.slice(1);
       let url = hash;
       // console.log('loadDefault hash', hash);
@@ -484,11 +485,11 @@ export default class MainController {
     }
     else if (that.defaultURL) {
       // console.log('loadDefault defaultURL', that.defaultURL);
-      that.loadURL(that.defaultURL, that.defaultTitle);
+      that.loadURL(that.defaultURL);
     }
     else {
       // console.log('loadDefault loadSource', that.defaultSource.slice(-20), that.defaultTitle, '');
-      that.loadSource(that.defaultSource, that.defaultTitle, '');
+      that.loadSource(that.defaultSource, that.defaultTitle, null, null);
     }
   }
 
@@ -503,10 +504,58 @@ export default class MainController {
         reader.addEventListener("loadend", function() {
           blobText = reader.result;
           // console.log('loadFile', blobText.slice(0, 20));
-          that.loadSource(blobText, file.name, '');
+          that.loadSource(blobText, file.name, null, null);
         });
         reader.readAsText(file);
       }
+    }
+  }
+
+
+
+  codemirrorLoaded(_editor) {
+    // console.log('codemirrorLoaded', _editor);
+    this.cmInstance = _editor;
+    this.cmInstance.focus();
+
+    // // Editor part
+    // var _doc = _editor.getDoc();
+    // _editor.focus();
+
+    // // Options
+    // _editor.setOption('firstLineNumber', 10);
+    // _doc.markClean();
+
+    // // Events
+    // _editor.on("beforeChange", function(){ ... });
+    // _editor.on("change", function(){ ... });
+  }
+
+
+  setError(error) {
+    this.errorMessage = error;
+    this.inputURL = '';
+    this.inputSource = '';
+  }
+
+  showHelp() {
+    var that = this;
+    var modalInstance = this.$uibModal.open({
+      animation: this.animationsEnabled,
+      templateUrl: 'Help.tpl.html',
+      controller: 'HelpController',
+      controllerAs: 'help',
+      resolve: {
+        modalInfo: function () {
+          return that.modalInfo;
+        }
+      }
+    });
+  }
+
+  editSourceChanged() {
+    if (this.editSource && (this.inputSource !== this.editSource)) {
+      this.loadSource(this.editSource, this.inputTitle, this.inputURL, null);
     }
   }
 }

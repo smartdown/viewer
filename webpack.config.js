@@ -29,8 +29,6 @@ var smartdownDoc = path.join(smartdownRoot, 'doc/');
 var smartdownGallery = path.join(nm, 'smartdown-gallery/');
 var smartdownGalleryRsrc = path.join(nm, 'smartdown-gallery/resources/');
 var smartdownJS = path.join(smartdown, 'smartdown.js');
-var smartdownCalcHandlersJS = path.join(smartdown, 'calc_handlers.js');
-// var smartdownCalcHandlersJS = path.join(app, 'calc_handlers.js');
 var smartdownCSS = path.join(smartdown, 'smartdown.css');
 var smartdownFontsCSS = path.join(smartdown, 'fonts.css');
 var noParse = [
@@ -77,7 +75,6 @@ var config = {
     alias: {
       smartdownJS$: smartdownJS,
       smartdownGallery$: smartdownGallery,
-      smartdownCalcHandlersJS$: smartdownCalcHandlersJS,
       smartdownCSS$: smartdownCSS,
       smartdownFontsCSS$: smartdownFontsCSS,
       angular$: angularJS,

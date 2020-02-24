@@ -200,3 +200,14 @@ div.container-fluid .row.smartdown-frame {
   right: 0;
   margin: 0 12px;
 }
+
+.smartdown-container h1,
+.smartdown-container h2,
+.smartdown-container h3,
+.smartdown-container h4,
+.smartdown-container h5,
+.smartdown-container h6
+ {
+  padding-top: 70px;
+  margin-top: -70px;
+}
