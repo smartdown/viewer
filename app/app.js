@@ -165,7 +165,6 @@ function uiCodemirrorDirective($timeout, uiCodemirrorConfig) {
       // Skip the initial watch firing
       if (newVal !== oldVal) {
         $timeout(function() {
-          console.log('uiRefreshAttr');
           codeMirror.refresh();
         });
       }
@@ -284,7 +283,7 @@ app.run(['$rootScope',
       var oReq = new XMLHttpRequest();
       oReq.addEventListener('load', lookupComplete);
       var url = 'https://en.wikipedia.org/w/api.php?action=query&formatversion=2&prop=pageimages%7Cpageterms&';
-      url += 'titles=' + encodeURI(wdKey);  // Albert%20Einstein%7CAlbert%20Ellis%7CAlbert%20Estopinal';
+      url += 'titles=' + encodeURI(wdKey); // Albert%20Einstein%7CAlbert%20Ellis%7CAlbert%20Estopinal';
       url += '&pilimit=3&piprop=thumbnail&wbptterms=description&redirects=&format=json&origin=*';
 
       oReq.open('GET', url);
@@ -301,7 +300,6 @@ app.run(['$rootScope',
     }
 
     function cardLoader(cardKey) {
-      console.log('cardLoader', cardKey);
       $rootScope.$broadcast('go-to-card', cardKey);
     }
 
@@ -311,7 +309,7 @@ app.run(['$rootScope',
         replace: '/gallery/resources/'
       }
     ];
-    console.log('baseURL', baseURL);
+
     smartdown.initialize(icons, baseURL, smartdownIsLoaded, cardLoader, calcHandlers, linkRules);
   }]);
 

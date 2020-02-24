@@ -93,31 +93,26 @@ export default class MainController {
     // Navigation
 
     this.$scope.$on('go-to-card', function(event, cardKey) {
-      console.log('go-to-card', cardKey, event);
       if (that.showInputSource) {
         that.hideEditor();
       }
       that.loadURL(cardKey);
     });
 
-    window.onhashchange = function() {
-      console.log('onhashchange');
-    };
-
     window.onpopstate = function(event) {
       event.preventDefault();
       event.stopImmediatePropagation();
       let cardKey = window.location.href;
-      console.log('onpopstate cardKey', cardKey, that.lastLoadedRawPrefix);
+      // console.log('onpopstate cardKey', cardKey, that.lastLoadedRawPrefix);
 
       if (cardKey.indexOf(that.lastLoadedRawPrefix) === 0) {
         cardKey = cardKey.slice(that.lastLoadedRawPrefix.length + 1);
-        console.log('...strip lastLoadedRawPrefix', cardKey);
+        // console.log('...strip lastLoadedRawPrefix', cardKey);
       }
 
       if (cardKey.indexOf('#SD_') === 0) {
         cardKey = that.rootHash + cardKey;
-        console.log('...insert before subhash', cardKey);
+        // console.log('...insert before subhash', cardKey);
       }
 
       $scope.$broadcast('go-to-card', cardKey);
@@ -238,7 +233,7 @@ export default class MainController {
 
     that.smartdown.setHome(source, renderElement, function() {
       if (subHash) {
-        console.log('setHome subhash', subHash, window.location.hash, `#${that.rootHash}${subHash}`);
+        // console.log('setHome subhash', subHash, window.location.hash, `#${that.rootHash}${subHash}`);
         window.history.pushState(null, subHash, `#${that.rootHash}${subHash}`);
       }
       that.smartdown.startAutoplay(renderElement);
@@ -255,7 +250,6 @@ export default class MainController {
           if (subHash) {
             const target = document.getElementById(subHash.slice(1));
             if (target) {
-              console.log('scroll', subHash);
               target.scrollIntoView();
             }
           }
@@ -288,7 +282,7 @@ export default class MainController {
 
 
   loadSource(source, cardKey, url, subHash) {
-    console.log('loadSource', source.slice(-20), cardKey, url, subHash);
+    // console.log('loadSource', source.slice(-20), cardKey, url, subHash);
     this.inputSource = source;
     this.inputTitle = cardKey;
     // this.editSource = source;
@@ -302,7 +296,7 @@ export default class MainController {
       // console.log('###loadSource...url null');
     }
     else if (url === '/') {
-      console.log('###loadSource...url empty. push current path', window.location.pathname);
+      // console.log('###loadSource...url empty. push current path', window.location.pathname);
 
       window.history.pushState(stateObj, cardKey, window.location.pathname);
     }
@@ -345,12 +339,12 @@ export default class MainController {
 
 
   loadAsyncCard(cardKey, cardURL, subHash) {
-    console.log('loadAsyncCard', cardKey, cardURL, subHash);
+    // console.log('loadAsyncCard', cardKey, cardURL, subHash);
     var that = this;
 
     that.$http.get(cardURL, {withCredentials: false}).then(
       function(result) {
-        console.log('loadAsyncCard success', cardURL, cardKey, result.data.slice(0, 40));
+        // console.log('loadAsyncCard success', cardURL, cardKey, result.data.slice(0, 40));
         that.inputURL = cardURL;
         that.rootHash = cardKey;
 
@@ -364,7 +358,7 @@ export default class MainController {
   }
 
   loadURL(cardKey) {
-    console.log('loadURL', cardKey, this.rootHash);
+    // console.log('loadURL', cardKey, this.rootHash);
     this.hideEditor();
     var that = this;
 
@@ -374,25 +368,25 @@ export default class MainController {
     }
     else {
       cardKey = this.shortenGistRawURL(cardKey);
-      console.log('cardKey...', cardKey, this.lastLoadedRawPrefix, this.rootHash);
+      // console.log('cardKey...', cardKey, this.lastLoadedRawPrefix, this.rootHash);
 
       let subHash = null;
       const subHashIndex = cardKey.indexOf('#SD_');
       if (subHashIndex >= 0) {
         subHash = cardKey.slice(subHashIndex);
         cardKey = cardKey.slice(0, subHashIndex);
-        console.log('...subhash found', subHash, cardKey);
+        // console.log('...subhash found', subHash, cardKey);
       }
 
       if (cardKey.indexOf(that.lastLoadedRawPrefix) === 0) {
         cardKey = cardKey.slice(that.lastLoadedRawPrefix.length + 1);
-        console.log('...trim lastLoadedRawPrefix', cardKey);
+        // console.log('...trim lastLoadedRawPrefix', cardKey);
       }
 
       if (cardKey.indexOf('#') === 0) {
         cardKey = cardKey.slice(1);
       }
-      console.log('...trim leading hash', cardKey);
+      // console.log('...trim leading hash', cardKey);
 
       if (cardKey.indexOf('http') === 0) {
         gistOrg = '';
@@ -401,7 +395,7 @@ export default class MainController {
         var endOfPath = cardKey.lastIndexOf('/');
         if (endOfPath > 0) {
           this.lastLoadedRawPrefix = cardKey.slice(0, endOfPath);
-          console.log('...lastLoadedRawPrefix', this.lastLoadedRawPrefix);
+          // console.log('...lastLoadedRawPrefix', this.lastLoadedRawPrefix);
         }
 
         that.loadAsyncCard(cardKey, cardKey, subHash);
@@ -411,7 +405,7 @@ export default class MainController {
         gistID = '';
         that.lastLoadedRawPrefix = rawPrefix;
         that.rootHash = cardKey;
-        console.log('...adjust rawPrefix/rootHash', rawPrefix, cardKey);
+        // console.log('...adjust rawPrefix/rootHash', rawPrefix, cardKey);
         that.loadAsyncCard(cardKey, cardKey, subHash);
       }
       else if (gistOrg !== '' && gistID !== '') {
@@ -438,24 +432,24 @@ export default class MainController {
       else {
         gistOrg = '';
         gistID = '';
-        console.log('this.lastLoadedRawPrefix !== rawPrefix', this.lastLoadedRawPrefix, rawPrefix);
+        // console.log('this.lastLoadedRawPrefix !== rawPrefix', this.lastLoadedRawPrefix, rawPrefix);
         if (this.lastLoadedRawPrefix !== rawPrefix) {
           const cardURL = this.lastLoadedRawPrefix + suffix;
-          console.log('defaultCard1', this.lastLoadedRawPrefix, cardKey, cardURL);
+          // console.log('defaultCard1', this.lastLoadedRawPrefix, cardKey, cardURL);
           that.loadAsyncCard(cardKey, cardURL, subHash);
         }
         else {
           let cardURL = 'gallery/' + cardKey + '.md';
           if (subHash) {
             cardURL = cardKey;
-            console.log('leave rootHash along with subhash ', that.rootHash, subHash);
+            // console.log('leave rootHash along with subhash ', that.rootHash, subHash);
           }
           else {
             that.rootHash = cardURL;
             // cardURL = cardKey = that.rootHash;
-            console.log('adjust rootHash ', that.rootHash);
+            // console.log('adjust rootHash ', that.rootHash);
           }
-          console.log('defaultCard2', cardKey, cardURL, that.rootHash, subHash);
+          // console.log('defaultCard2', cardKey, cardURL, that.rootHash, subHash);
           that.loadAsyncCard(cardURL, cardURL, subHash);
         }
       }
