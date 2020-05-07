@@ -5,7 +5,7 @@ import angular from 'angular';
 import Split from 'split.js';
 const lodashThrottle = require('lodash/throttle');
 
-var rawPrefix = window.location.origin;
+var rawPrefix = window.location.origin + window.location.pathname;
 var gistPrefix = 'https://gist.githubusercontent.com/';
 var defaultHome = 'Home';
 var gistPathPrefix = '';
@@ -106,12 +106,12 @@ export default class MainController {
       // console.log('onpopstate cardKey', cardKey, that.lastLoadedRawPrefix);
 
       if (cardKey.indexOf(that.lastLoadedRawPrefix) === 0) {
-        cardKey = cardKey.slice(that.lastLoadedRawPrefix.length + 1);
+        cardKey = cardKey.slice(that.lastLoadedRawPrefix.length);
         // console.log('...strip lastLoadedRawPrefix', cardKey);
       }
 
-      if (cardKey.indexOf('#SD_') === 0) {
-        cardKey = that.rootHash + cardKey;
+      if (cardKey.indexOf('##') === 0) {
+        cardKey = that.rootHash + cardKey.slice(1);
         // console.log('...insert before subhash', cardKey);
       }
 
@@ -370,8 +370,13 @@ export default class MainController {
       cardKey = this.shortenGistRawURL(cardKey);
       // console.log('cardKey...', cardKey, this.lastLoadedRawPrefix, this.rootHash);
 
+      if (cardKey.indexOf('#') === 0) {
+        cardKey = cardKey.slice(1);
+        // console.log('...trim leading hash', cardKey);
+      }
+
       let subHash = null;
-      const subHashIndex = cardKey.indexOf('#SD_');
+      const subHashIndex = cardKey.indexOf('#');
       if (subHashIndex >= 0) {
         subHash = cardKey.slice(subHashIndex);
         cardKey = cardKey.slice(0, subHashIndex);
@@ -382,11 +387,6 @@ export default class MainController {
         cardKey = cardKey.slice(that.lastLoadedRawPrefix.length + 1);
         // console.log('...trim lastLoadedRawPrefix', cardKey);
       }
-
-      if (cardKey.indexOf('#') === 0) {
-        cardKey = cardKey.slice(1);
-      }
-      // console.log('...trim leading hash', cardKey);
 
       if (cardKey.indexOf('http') === 0) {
         gistOrg = '';

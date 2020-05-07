@@ -18,7 +18,7 @@
  -->
 
   <% if (typeof htmlWebpackPlugin.options.smartdownBaseURL === 'string'){ %>
-  <base href="<%= htmlWebpackPlugin.options.smartdownBaseURL %>">
+  <!-- <base href="<%= htmlWebpackPlugin.options.smartdownBaseURL %>"> -->
   <% } %>
 
   <link
@@ -46,7 +46,7 @@
   <script src="starter.js"></script>
   <script>
     window.smartdownResourceURL = '';
-    window.smartdownBaseURL = '/';
+    window.smartdownBaseURL = '/lib/';
 
     <% if (typeof htmlWebpackPlugin.options.smartdownBaseURL === 'string'){ %>
 

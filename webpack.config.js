@@ -47,6 +47,10 @@ var outputFile = './bundle.js';
 var indexFile = 'index.ejs';
 var baseURL = '/'; // development ? '/' : '/viewer/';
 
+if (process.env.VIEWER) {
+  baseURL = '/viewer/';
+}
+
 var galleryIgnores = [
   '.git/**',
   'README.md',
