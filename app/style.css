@@ -186,6 +186,10 @@ div.container-fluid .row.smartdown-frame {
   vertical-align: unset;
 }
 
+.smartdown-outer-container {
+  overflow-y: hidden !important;
+}
+
 .smartdown-outer-container.source-visible {
   margin: 0;
 }

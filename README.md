@@ -165,7 +165,5 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.46** - SD 1.0.39. Gallery 0.0.64.
 - **0.0.47** - SD 1.0.40. Gallery 0.0.65. Adds support for subhashes within a page. General cleanup.
 - **0.0.48** - Fix issues with Gist handling. Updated to SD 1.0.45, Gallery 0.0.69. Fix intra-page link handling.
-
-
-
+- **0.0.49** - SD 1.0.46. Fix issue on Videos page where vertical scrollbar appears in smartdown-outer-container.
 
