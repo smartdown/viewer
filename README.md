@@ -167,3 +167,6 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.48** - Fix issues with Gist handling. Updated to SD 1.0.45, Gallery 0.0.69. Fix intra-page link handling.
 - **0.0.49** - SD 1.0.46. Fix issue on Videos page where vertical scrollbar appears in smartdown-outer-container.
 - **0.0.50** - SD 1.0.47. Gallery 0.0.71. Update deps.
+- **0.0.51** - SD 1.0.50. Gallery 0.0.74.
+- **0.0.52** - SD 1.0.52. Gallery 0.0.76.
+
