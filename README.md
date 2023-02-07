@@ -169,4 +169,6 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.50** - SD 1.0.47. Gallery 0.0.71. Update deps.
 - **0.0.51** - SD 1.0.50. Gallery 0.0.74.
 - **0.0.52** - SD 1.0.52. Gallery 0.0.76.
+- **0.0.53** - SD 1.0.57. Gallery 0.0.79. Enhance SSL cert create for local development.
+
 

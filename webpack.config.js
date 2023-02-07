@@ -205,9 +205,8 @@ var config = {
     inline: true,
     // https: true,
     https: {
-      key: fs.readFileSync("./server.key"),
-      cert: fs.readFileSync("./server.crt"),
-      // ca: fs.readFileSync("/path/to/ca.pem"),
+      key: fs.readFileSync("./ssl/cert.key"),
+      cert: fs.readFileSync("./ssl/cert.crt"),
     },
     contentBase: dist,
     watchContentBase: true,
