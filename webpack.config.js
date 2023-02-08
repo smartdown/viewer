@@ -204,10 +204,6 @@ var config = {
     hot: false,
     inline: true,
     // https: true,
-    https: {
-      key: fs.readFileSync("./ssl/cert.key"),
-      cert: fs.readFileSync("./ssl/cert.crt"),
-    },
     contentBase: dist,
     watchContentBase: true,
     historyApiFallback: true,
@@ -219,6 +215,13 @@ var config = {
     }
   }
 };
+
+if (development) {
+  config.devServer.https = {
+    key: fs.readFileSync("./ssl/cert.key"),
+    cert: fs.readFileSync("./ssl/cert.crt"),
+  };
+}
 
 config.plugins.push(
   new HtmlWebpackPlugin({
