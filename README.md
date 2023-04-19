@@ -171,3 +171,4 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 - **0.0.52** - SD 1.0.52. Gallery 0.0.76.
 - **0.0.53** - SD 1.0.57. Gallery 0.0.79. Enhance SSL cert create for local development.
 - **0.0.54** - Fixed .gitignore to avoid SSL files, and removed ssl/ files that should not be committed. Improved publish.sh to be more robust against GitHub policy changes. Adjust version in package.json to 0.0.54.
+- **0.0.55** - Update to smartdown v1.0.58. Add handling of ?theme= URL argument.

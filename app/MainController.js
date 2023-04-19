@@ -31,6 +31,32 @@ export default class MainController {
     this.$anchorScroll = $anchorScroll;
     this.$uibModal = $uibModal;
     this.showInputSource = false;
+
+    let hash = window.location.hash;
+    let args = '';
+    let themeName = '';
+    const argsPos = hash.indexOf('?');
+    if (argsPos >= 0) {
+      args = hash.slice(argsPos + 1);
+      hash = hash.slice(0, argsPos);
+
+      const extraArgPos = args.indexOf('?');
+
+      if (extraArgPos >= 0) {
+        args = args.slice(0, extraArgPos);
+      }
+
+      const argsParams = new URLSearchParams(args);
+      themeName = argsParams.get('theme') || '';
+    }
+
+    if (themeName === '') {
+      const search = window.location.search;
+      const searchParams = new URLSearchParams(search);
+      themeName = searchParams.get('theme') || '';
+    }
+
+    this.themeClass = `smartdown-theme-${themeName}`;
     this.inputSource = '';
     this.inputTitle = '';
     this.inputURL = '';
@@ -283,12 +309,12 @@ export default class MainController {
 
   loadSource(source, cardKey, url, subHash) {
     // console.log('loadSource', source.slice(-20), cardKey, url, subHash);
+
     this.inputSource = source;
     this.inputTitle = cardKey;
     // this.editSource = source;
     this.inputURL = url;
     this.errorMessage = null;
-
 
     var stateObj = window.history.state;
     // console.log('loadSource', source.slice(0, 20), cardKey, url, JSON.stringify(stateObj));
