@@ -2,15 +2,17 @@ var webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 var path = require('path');
 var fs = require('fs');
 
-process.noDeprecation = true;   // https://github.com/babel/babel-loader/issues/392
+process.noDeprecation = true; // https://github.com/babel/babel-loader/issues/392
 
 var nodeEnvironment = process.env.BUILD;
-var production = nodeEnvironment === 'production';
+var production = nodeEnvironment === 'production' || nodeEnvironment === 'analyze';
 var development = nodeEnvironment === 'development';
+var mode = (nodeEnvironment === 'production' || nodeEnvironment === 'development') ?
+            nodeEnvironment : 'production';
 
 var dist = path.join(__dirname, 'dist/');
 var app = path.join(__dirname, 'app');
@@ -65,7 +67,7 @@ var galleryIgnores = [
   'Wikidata.md'];
 
 var config = {
-  mode: nodeEnvironment,
+  mode,
   context: app,
 
   entry: entryFile,

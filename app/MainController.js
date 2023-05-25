@@ -460,6 +460,7 @@ export default class MainController {
         gistID = '';
         // console.log('this.lastLoadedRawPrefix !== rawPrefix', this.lastLoadedRawPrefix, rawPrefix);
         if (this.lastLoadedRawPrefix !== rawPrefix) {
+          var suffix = '#NotSureWhatShouldGoHere';
           const cardURL = this.lastLoadedRawPrefix + suffix;
           // console.log('defaultCard1', this.lastLoadedRawPrefix, cardKey, cardURL);
           that.loadAsyncCard(cardKey, cardURL, subHash);
