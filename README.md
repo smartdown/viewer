@@ -10,7 +10,7 @@
 
 ## Obtaining the Smartdown Library and Examples
 
-Although Smartdown will eventually have all of its source code published and licensed under an open source license, it is currently in a rapid development phase and I'm just one person (so far), so I haven't nailed down all the niceties of a proper open source project. In order to effectively beta-test this software, however, I am making available many of the tools and examples as well as the compiled and bundled Smartdown library via `npm` and via [`https://unpkg.com/smartdown@0.0.63/docs/lib/`](https://unpkg.com/smartdown@0.0.63/docs/lib/). The `npm` `smartdown` module contains the source necessary to render a site similar to the [Simple Viewer Site](https://smartdown.site/lib) described above.
+Although Smartdown will eventually have all of its source code published and licensed under an open source license, it is currently in a rapid development phase and I'm just one person (so far), so I haven't nailed down all the niceties of a proper open source project. In order to effectively beta-test this software, however, I am making available many of the tools and examples as well as the compiled and bundled Smartdown library via `npm` and via [`https://unpkg.com/smartdown/docs/lib/`](https://unpkg.com/smartdown/docs/lib/). The `npm` `smartdown` module contains the source necessary to render a site similar to the [Simple Viewer Site](https://smartdown.site/lib) described above.
 
 ### Local Smartdown Viewing
 
@@ -86,9 +86,8 @@ The `smartdown-viewer` app is designed so that the URL pointing to the app can b
 
 This is what I use, you may get lucky with slightly older/newer versions.
 
-- Node 6.11.2
-- NPM 5.5.1
-
+- Node 18.16.0
+- npm '9.5.1
 
 ## Requirements to run
 
@@ -103,7 +102,7 @@ npm install
 npm run build
 ```
 
-## Running
+## Running in Development Mode
 
 ```
 cd site/
@@ -113,57 +112,4 @@ open http://localhost:8080/webpack-dev-server/smartdown-viewer # On MacOSX
 #   http://localhost:8080/webpack-dev-server/smartdown-viewer
 #
 ```
-
-
-## Version History
-
-- **0.0.1** - First isolation from Smartdown's site/ directory.
-- **0.0.2** - Update to latest draft version of Smartdown 0.0.88
-- **0.0.3** - Apply this site as smartdown.site via CNAME.
-- **0.0.4** - Upgrade to SD 0.0.89. Populate the /lib directory for legacy clients who expected smartdown.site/lib/ to be where SD lives.
-- **0.0.5** - Add SimpleSiteExample to gist/ and lib/ for compatibility with existing users of gist/ and lib/ on smartdown.site.
-- **0.0.6** - Update to SD 0.0.92. Fix target=_blank links to use rel=noopener.
-- **0.0.7** - Update to SD 0.0.93.
-- **0.0.8** - Update to SD 0.0.94. Add temporary 'important' CSS qualifer for Disclosable Tooltip-style links. Smartdown CSS needs a more-specific selector, or the Viewer needs to have a more relaxed selector for text color. This is a hack.
-- **0.0.9** - Update to SD 0.0.95.
-- **0.0.10** - Update to SD 0.0.97.
-- **0.0.11** - SD 0.0.98.
-- **0.0.12** - SD 0.0.99. Use dist/ instead of docs/. Add publish.sh
-- **0.0.13** - SD 0.0.100. SD Gallery 0.0.20
-- **0.0.14** - SD 0.0.102. SD Gallery 0.0.22
-- **0.0.15** - SD 0.0.111. SD Gallery 0.0.23. Ensure Smartdown API docs are available. Includes Decoration capability.
-- **0.0.16** - SD 0.0.112.
-- **0.0.17** - SD 0.0.113, Gallery 0.0.25 (DisclosablesPlus and Decorations)
-- **0.0.18** - SD 0.0.114.
-- **0.0.19** - SD 0.0.115. Use Terser webpack plugin instead of UglifyJS.
-- **0.0.20** - SD 0.0.116. Gallery 0.0.26.
-- **0.0.21** - SD 0.0.117. Gallery 0.0.28.
-- **0.0.22** - SD 0.0.118. Gallery 0.0.29.
-- **0.0.23** - SD 1.0.0. Gallery 0.0.29.
-- **0.0.24** - SD 1.0.1. Gallery 0.0.30.
-- **0.0.25** - SD 1.0.2. Gallery 0.0.30.
-- **0.0.26** - SD 1.0.5. Gallery 0.0.33.
-- **0.0.27** - SD 1.0.5. Gallery 0.0.33. Update dependencies. Fix CodeMirror problem where cursor is misaligned and you can't enter more than 3 characters.
-- **0.0.28** - SD 1.0.8. Gallery 0.0.37 (jsPsych).
-- **0.0.29** - Gallery 0.0.39
-- **0.0.30** - Gallery 0.0.40, SD 1.0.9
-- **0.0.31** - Gallery 0.0.41, SD 1.0.11
-- **0.0.32** - Gallery 0.0.41, SD 1.0.12
-- **0.0.33** - Gallery 0.0.42, SD 1.0.13. Add more padding to smartdown-outer-container.
-- **0.0.34** - Gallery 0.0.43, SD 1.0.14. Update deps.
-- **0.0.35** - Gallery 0.0.44 SD 1.0.16. Update deps.
-- **0.0.36** - Gallery 0.0.46 SD 1.0.18. Update deps. Simplify TerserWebpackPlugin options and avoid mangle.keep_fnames=true.
-- **0.0.37** - Gallery 0.0.47, SD 1.0.19.
-- **0.0.38** - Gallery 0.0.48, SD 1.0.20
-- **0.0.39** - Gallery 0.0.49, SD 1.0.21.
-- **0.0.40** - Gallery 0.0.50, SD 1.0.23.
-- **0.0.41** - Gallery 0.0.52, SD 1.0.25.
-- **0.0.42** - Gallery 0.0.53, SD 1.0.26.
-- **0.0.43** - Gallery 0.0.57, SD 1.0.30.
-- **0.0.44** - SD 1.0.35. Gallery 0.0.61.
-- **0.0.45** - SD 1.0.38. Gallery 0.0.63.
-- **0.0.46** - SD 1.0.39. Gallery 0.0.64.
-- **0.0.47** - SD 1.0.40. Gallery 0.0.65. Adds support for subhashes within a page. General cleanup.
-- **0.0.48** - Fix issues with Gist handling. Updated to SD 1.0.45, Gallery 0.0.69. Fix intra-page link handling.
-- **0.0.49** - SD 1.0.46. Fix issue on Videos page where vertical scrollbar appears in smartdown-outer-container.
 

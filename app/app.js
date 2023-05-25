@@ -8,6 +8,10 @@ import ngFileUpload from 'ng-file-upload';
 
 import CodeMirror from 'codemirrorJS';
 window.CodeMirror = CodeMirror;
+window.SmartdownViewer = {
+  version: '0.0.56',
+};
+
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/neat.css';
 import 'codemirror/addon/edit/continuelist.js';
@@ -29,7 +33,7 @@ require('./style.css');
 
 window.smartdown = smartdown;
 
-var dependentModules = [nguibootstrap, ngResource, ngFileUpload, 'ui.codemirror']; // , 'simplemde'];
+var dependentModules = [nguibootstrap, ngResource, ngFileUpload, 'ui.codemirror'];
 
 var app = angular.module('app', dependentModules);
 

@@ -1,3 +1,4 @@
+/* global angular */
 export default class HelpController {
   constructor($http, $uibModalInstance, modalInfo) {
     this.$http = $http;
